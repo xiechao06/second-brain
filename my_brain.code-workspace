@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "Filtered View",
+			"uri": "fildir:/"
+		}
+	],
+	"settings": {
+		"files.defaultLanguage": "markdown",
+		"foam.edit.linkReferenceDefinitions": "off",
+		"foam.openDailyNote.directory": "journal",
+		"foam.openDailyNote.titleFormat": "fullDate",
+		"pasteImage.path": "${projectRoot}/attachments",
+		"pasteImage.showFilePathConfirmInputBox": true,
+		"gitdoc.enabled": false
+	}
+}

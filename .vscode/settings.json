@@ -26,7 +26,7 @@
   "pasteImage.path": "${projectRoot}/attachments",
   "pasteImage.showFilePathConfirmInputBox": true,
   "prettier.singleQuote": false,
-  "gitdoc.enabled": true,
+  "gitdoc.enabled": false,
   "cSpell.words": [
     "cppreference",
     "isocpp"
