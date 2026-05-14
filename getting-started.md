@@ -57,3 +57,7 @@ A special mention goes to [Markdown Links](https://marketplace.visualstudio.com/
 [daily-notes]: docs/features/daily-notes.md "Daily Notes"
 [todo]: todo.md "Todo"
 [link-reference-definitions]: docs/features/link-reference-definitions.md "Link Reference Definitions"
+[keyboard-shortcuts]: docs/getting-started/keyboard-shortcuts "Keyboard Shortcuts"
+[graph-visualization]: docs/features/graph-visualization "Graph Visualization"
+[tags-and-tag-explorer]: docs/features/tags-and-tag-explorer "Tags and Tag Explorer"
+[note-templates]: docs/features/note-templates "Note Templates"
