@@ -6,9 +6,11 @@ Welcome to your new foam workspace, let's get you started.
 
 Let's go through this to set up your repo:
 
-- [ ] if you are new with VS Code, see how to [[get-started-with-vscode]] and how to [[use-keyboard-shortcuts-for-editing]]
+- [ ] if you are new with VS Code, see how to [[get-started-with-vscode]] and how to use [[keyboard-shortcuts]] for editing.
 
 - [ ] you can navigate the links between your notes by `cmd+click` (or `ctrl+click` on Windows) on a wikilink. You can go back with `ctrl+-`. Here, go to your [[inbox]]
+
+- [ ] You can link to a specific block within a note by adding `^my-id` at the end of any paragraph, then referencing it as `[[note#^my-id]]`. Use `![[note#^my-id]]` to embed just that block. See [[block-anchors]].
 
 - [ ] to see how your notes are connected, execute the `Foam: Show Graph` command. See [[graph-visualization]].
 
@@ -47,14 +49,11 @@ Here they are:
 
 A special mention goes to [Markdown Links](https://marketplace.visualstudio.com/items?itemName=tchayen.markdown-links) and [Markdown Notes](https://marketplace.visualstudio.com/items?itemName=kortina.vscode-markdown-notes) which have now been replaced by our own implementation but were foundational to Foam's beginnings.
 
-[get-started-with-vscode]: docs/how-to/get-started-with-vscode "Getting started with VS Code"
-[use-keyboard-shortcuts-for-editing]: docs/how-to/use-keyboard-shortcuts-for-editing "Use Keyboard Shortcuts for Editing"
-[inbox]: inbox "Inbox"
-[graph-visualization]: docs/features/graph-visualization "Graph Visualization"
-[tags-and-tag-explorer]: docs/features/tags-and-tag-explorer "Tags and Tag Explorer"
-[spell-checking]: docs/features/spell-checking "Spell Checking"
-[paste-images-from-clipboard]: docs/how-to/paste-images-from-clipboard "Paste Images from Clipboard"
-[daily-notes]: docs/features/daily-notes "Daily Notes"
-[todo]: todo "Todo"
-[link-reference-definitions]: docs/features/link-reference-definitions "Link Reference Definitions"
-[note-templates]: docs/features/note-templates "Note Templates"
+[get-started-with-vscode]: docs/getting-started/get-started-with-vscode.md "Using Foam with VS Code Features"
+[inbox]: inbox.md "Inbox"
+[block-anchors]: docs/features/block-anchors.md "Block Anchors"
+[spell-checking]: docs/features/spell-checking.md "Spell Checking"
+[paste-images-from-clipboard]: docs/features/paste-images-from-clipboard.md "Paste Images from Clipboard"
+[daily-notes]: docs/features/daily-notes.md "Daily Notes"
+[todo]: todo.md "Todo"
+[link-reference-definitions]: docs/features/link-reference-definitions.md "Link Reference Definitions"

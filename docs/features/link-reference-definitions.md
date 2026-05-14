@@ -1,33 +1,60 @@
 # Link Reference Definitions
 
-When you use `[[wikilinks]]`, the [foam-vscode](https://github.com/foambubble/foam/tree/master/packages/foam-vscode) extension can generate [Markfalsedown Link Reference Definitions](https://spec.commonmark.org/0.29/#link-reference-definitions) at the bottom of the file.
+Link reference definitions make your notes compatible with standard Markdown processors by converting wikilinks to standard Markdown references.
 
-This is done to make the content of the file compatible with various Markdown tools (e.g. parsers, static site generators, VS code plugins etc), which don't support `[[wikilinks]]` directly.
+Foam doesn't need references in order to work, but this feature is aimed at supporting other tools you might want to integrate with.
 
-This feature can be disabled by default (as it's done in the foam-template) because you don't need it to navigate your workspace, it is useful for publishing and compatibility of your notes.
+## What Are Link Reference Definitions?
 
-## Example
+Foam can automatically add reference definitions to the bottom of your notes:
 
-The following example:
+**Your note:**
 
-  ```md
-  - [[graph-visualization]]
-  ```
+```markdown
+# Machine Learning
 
-...generates the following link reference definitions to the bottom of the file:
+Related to [[Data Science]] and [[Statistics]].
+```
 
-  ```md
-  [graph-visualization]: graph-visualization "Graph Visualization"
-  ```
+**With reference definitions:**
 
-## Configuration
+```markdown
+# Machine Learning
 
-You can use the `foam.edit.linkReferenceDefinitions` to configure the definitions (see [[get-started-with-vscode]]):
+Related to [[Data Science]] and [[Statistics]].
 
-- `withoutExtensions` (default): this works better with certain web publishing tools (e.g. GitHub pages)
-- `withExtensions`: this works better with standard markdown-based tools (e.g GitHub web UI)
-- `off`: this disables the generation of definitions
+[Data Science]: data-science.md 'Data Science'
+[Statistics]: statistics.md 'Statistics'
+```
 
-After changing the setting in your workspace, you can run the `Foam: Run Janitor (Experimental)` command to convert all existing definitions.
+## Enabling Reference Definitions
 
-[get-started-with-vscode]: ../how-to/get-started-with-vscode "Getting started with VS Code"
+Configure in your settings:
+
+```json
+{
+  "foam.edit.linkReferenceDefinitions": "withExtensions"
+}
+```
+
+**Options:**
+
+- `"off"` - Disabled (default)
+- `"withoutExtensions"` - References without extension
+- `"withExtensions"` - References with extension
+
+If you are using your notes only within Foam, you can keep definitions `off` (also to reduce clutter), otherwise pick your setting based on what is required by your use case.
+
+## How It Works
+
+1. Scans your note for wikilinks
+2. Generates reference definitions when you save
+3. Updates definitions when links change
+4. Maintains the auto-generated section
+
+## Benefits
+
+- **Standard Markdown compatibility** - Works with any Markdown processor
+- **Publishing platforms** - Compatible with GitHub Pages, Jekyll, etc.
+- **Future-proofing** - Not locked into Foam-specific format
+- **Team collaboration** - Others can read notes without Foam

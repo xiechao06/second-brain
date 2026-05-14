@@ -1,21 +1,48 @@
 # Daily Notes
 
-Daily notes allow you to quickly create and access notes for today.
+Daily notes allow you to quickly create and access a note file for each day.
 
-Try it out, run the `Foam: Open Daily Note` command.
+## Creating Daily Notes
 
-## Shortcuts and Snippets
+- **Command:** `Ctrl+Shift+P` → "Foam: Open Daily Note"
+- **Shortcut:** `Alt+D`
+- **Snippets:** Type `/today`, `/yesterday`, `/tomorrow` in any note
 
-You can quickly open today's daily note by pressing `alt+d`.
-You can also automatically open today's note via the `Foam › Open Daily Note: On Startup` setting.
+## Automatic Daily Notes
 
-You can also quickly create link to your daily notes, in the configured format, using [snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets).
+Open daily note automatically on VS Code startup:
 
-Type `/today` and press `enter` to link to today's note.
-You can also write:
+```json
+{
+  "foam.openDailyNote.onStartup": true
+}
+```
+
+## Daily Note Templates
+
+Create `.foam/templates/daily-note.md` to customize the structure:
+
+```markdown
+---
+type: daily-note
+---
+
+# Daily Note - $FOAM_DATE_YEAR-$FOAM_DATE_MONTH-$FOAM_DATE_DATE
+
+## Tasks
+
+- [ ]
+
+## Notes
+```
+
+## Date Snippets
+
+Create links to recent daily notes using snippets:
 
 | Snippet      | Date          |
 | ------------ | ------------- |
+| `/today`     | today         |
 | `/tomorrow`  | tomorrow      |
 | `/yesterday` | yesterday     |
 | `/monday`    | next Monday   |
@@ -25,18 +52,15 @@ You can also write:
 | `/-1m`       | one month ago |
 | `/+1y`       | in one year   |
 
-You get the idea ;)
-
 ## Configuration
 
-It's possible to customize path and heading of your daily notes, by following the [dateformat masking syntax](https://github.com/felixge/node-dateformat#mask-options).
-The following properties can be used:
+By default, daily notes are created as `yyyy-mm-dd.md` in the workspace's `journals` folder.
 
-```json
-  "foam.openDailyNote.directory": "journal",
-  "foam.openDailyNote.filenameFormat": "'daily-note'-yyyy-mm-dd",
-  "foam.openDailyNote.fileExtension": "mdx",
-  "foam.openDailyNote.titleFormat": "'Journal Entry, ' dddd, mmmm d",
-```
+To customize your daily note location and format you can create a `.foam/templates/daily-note.md` template. See [[templates]] for more information.
 
-The above configuration would create a file `journal/daily-note-2020-07-25.mdx`, with the heading `Journal Entry, Sunday, July 25`.
+There are also some settings to customize the behavior of daily notes, but they are deprecated and will be removed. Please use the `daily-note.md` template.
+
+To work with daily notes from the terminal, see [[daily|CLI daily command]].
+
+[templates]: templates.md 'Note Templates'
+[daily]: ../tools/cli/daily.md 'foam daily'
