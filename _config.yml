@@ -1,0 +1,36 @@
+# Jekyll configuration for GitHub Pages with Mermaid support
+
+# Site settings
+title: My Brain
+description: A personal knowledge management system
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    line_numbers: false
+
+# GitHub Pages settings
+plugins:
+  - jekyll-remote-theme
+
+remote_theme: pages-themes/primer@v0.2.0
+
+# Exclude files from the build
+exclude:
+  - .gitignore
+  - .github
+  - node_modules
+  - vendor
+  - "*.mmd"
+  - README.md
+
+# Enable future posts
+future: false
+
+# Liquid settings
+liquid:
+  error_mode: strict

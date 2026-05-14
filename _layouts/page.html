@@ -4,7 +4,11 @@ layout: default
 
 {{ content }}
 
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 <script type="text/javascript">
+  // Initialize Mermaid diagrams
+  mermaid.contentLoaded();
+
   // Hack: Replace page-link with "Page Title"
   document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
     a.innerText = a.title;
@@ -12,7 +16,7 @@ layout: default
   // Hack: Remove .md extension from wikilinks to get the html in jekyll
   document.querySelectorAll("a").forEach(l => {
     if (l.href.endsWith('.md')) {
-      l.href = l.href.substring(0, l.href.length-3)
+      l.href = l.href.substring(0, l.href.length - 3)
     }
   })
 </script>
