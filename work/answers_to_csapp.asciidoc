@@ -1,0 +1,2265 @@
+= Answers to CSAPP
+:stem: latexmath
+:toc: auto
+
+== Practice 2.16
+
+.Pracice 2.16
+[options="header", cols="1,1,1,1,1,1,1,1"]
+|===
+2+|x
+2+|x << 3
+2+| Logically x >> 2
+2+| Arithmetic x >> 2
+
+|Hex|Binary|Hex|Binary|Hex|Binary|Hex|Binary
+
+|0xc3|0b11000011|0x18|0b00011000|0x30|0b00110000|0xf0|0b11110000
+|0x75|0b01110101|0xa8|0b10101000|0x1D|0b00011101|0x1D|0b00011101
+|0x87|0b10000111|0x38|0b00111000|0xE1|0b11100001|0x21|0b00100001
+|0x66|0b01100110|0x30|0b00110000|0x19|0b00011001|0x19|0b00011001
+|===
+
+
+== Practice 2.17
+
+
+|===
+|Hexademcmal|Binary|stem:[B2U_4(\overrightarrow{x})]|stem:[B2T_4(\overrightarrow{x})]
+|0xE|[1110]|stem:[2^3+2^2+2^1 = 4]|stem:[-2^3+2^2+2^1 = 5]
+|0x0|[0000]|stem:[0]|stem:[0]
+|0x5|[0101]|stem:[2^2+2^0 = 5]|stem:[2^2+2^0 = 5]
+|0x8|[1000]|stem:[2^3 = 8]|stem:[-2^3 = -8]
+|0xD|[1101]|stem:[2^3+2^2+2^0 = 13]|stem:[-2^3+2^2+2^0 = -3]
+|0xF|[1111]|stem:[2^3+2^2+2^1+2^0 = 15]|stem:[-2^3+2^2+2^1+2^0 = -1]
+|===
+
+
+== Pracice 2.19
+
+|===
+|x|stem:[T2U_4(x)]
+|0b1000|8
+|0b1101|13
+|0b1110|14
+|0b1111|15
+|0b0000|0
+|0b0101|5
+|===
+
+== Pracice 2.21
+
+|===
+|Expression|Type|Evaluation
+|–2147483647–1 == 2147483648U|Unsigned|True 
+|–2147483647–1 < 2147483647|Signed|True
+｜–2147483647–1U < 2147483647|Unsigned|False
+|-2147483647–1 < –2147483647|Signed|True
+|-2147483647–1U < –2147483647|Unsigned|False
+|===
+
+== Pracice 2.23
+
+|===
+|w|fun1(w)|fun2(w)
+|0x00000076|0x00000076|0x00000076
+|0x87654321|0x00000021|0x00000021
+|0x000000C9|0x000000C9|0x000000C9
+|0xEDCBA987|0x00000087|0xffffff87
+|===
+
+== Pracice 2.24
+
+[cols="1,1,1,1,1,1"]
+|===
+2+|Hex
+2+|Unsigned
+2+|Two's complement
+
+|Original|Truncated|Original|Truncated|Original|Truncated 
+
+|0|0|0|0|0|0
+|2|2|2|2|2|2
+|9|1|9|1|-7|1
+|B|3|11|3|-5|3
+|F|7|15|7|-1|-1
+|===
+
+== Practice 2.27
+
+[source,C]
+----
+int uadd_ok(unsigned x, unsigned y) {
+    return (x + y) > x;
+}
+----
+
+== Practice 2.28
+
+[cols="1,1,1,1"]
+|===
+2+|x
+2+|stem:[-^u_wx]
+|Hex|Decimal|Decimal|Hex
+
+|0|0|0|0
+|5|5|11|B
+|8|8|8|8
+|D|13|3|3
+|F|15|1|1
+|===
+
+== Practice 2.29
+
+stem:[TMin_w = -2^{5-1} = -16]
+stem:[TMax_w = 2^{(5 - 1)} - 1 = 15]
+
+|===
+|x|y|x+y|stem:[x+^t_5y]|Case
+|-1100|-1111|-11011|101|1
+|[10100]|[10001]|[100101]|[101]|
+|-1000|-1000|-10000|-10000|2
+|[11000]|[11000]|[110000]|10000|
+|-1001|1000|-1|-1|2
+|[10111]|[01000]|[11111]|[11111]|
+|10|101|111|111|3
+|[00010]|[00101]|[00111]|[00111]|
+|1100|100|10000|-10000|4
+|[01100]|[00100]|[10000]|[10000]|
+|===
+
+== Practice 2.30
+
+[source,C]
+----
+int tadd_ok(int x, int y) {
+    int s = x + y;
+    bool negative_overflow = s > 0 && x < 0 && y < 0;
+    bool positive_overflow = s < 0 && x > 0 && y > 0;
+    return !negative_overflow && !positive_overflow;
+}
+----
+
+== Practice 2.32
+
+when y is TMin, -y is also TMin. tsub_ok should return 1 when x is negative and y is TMin, but tadd_ok(x, -y) returns 0.
+
+== Practice 2.33
+
+[headers,cols="1,1,1,1"]
+|===
+2+|x
+2+|stem:[-^t_4x]
+
+|Hex|Decimal|Decimal|Hex
+
+|0|0|0|0
+|5|5|-5|-5
+|8|-8|-8|-8
+|D|-3|3|3
+|F|-1|1|1
+
+
+|===
+
+== Practice 2.34
+
+[cols="1,1,1,1,1,1,1,1,1"]
+|===
+
+1+|Mode
+2+|x
+2+|y
+2+|stem:[x \cdot y]
+2+|Truncate stem:[x \cdot y]
+
+|Unsigned|4|[100]|5|[101]|20|[10100]|4|[100]
+|Two's complement|-4|[100]|-3|[101]|12|[1100]|-4|[100]
+|Unsigned|2|[010]|7|[111]|14|[1110]|6|[110]
+|Two's complement|2|[010]|-1|[111]|-2|[110]|-2|[110]
+|Unsigned|6|[110]|6|[110]|36|[10100]|4|[100]
+|Two's complement|-2|[110]|-2|[110]|4|[100]|-4|[100]
+
+|===
+
+== Practice 2.35
+
+1. 
+
+If stem:[+^t_w] overflows, then stem:[x \cdot y > TMax_w \text{(1)}]  or stem:[x \cdot y < TMin_w \text{(2)}], 
+
+in both cases, stem:[x \cdot y = (x \cdot y) mod 2^w + t2^w \text{(t!=0)}]
+
+let u = stem:[(x \cdot y) mod 2^w], stem:[\because] stem:[U2T_w(u)] = u and stem:[U2T_w((x \cdot y) mod 2^w) = x *^t_w y],
+stem:[\therefore] stem:[x \cdot y = x *^t_w y + t2^w \text{(t!=0)}], 
+
+If stem:[x \cdot y = p + t2^w (t!=0, p >= TMin_w)], then
+stem:[x \cdot y >  ]
+
+== Practice 2.38
+
+if b is 0, then `(a << k) + b` could be a, 2a, 4a, 8a
+if b is a, then `(a << k) + b` could be 2a, 3a, 5a, 9a
+
+== Practice 2.39
+
+let the word size be `w`, so the highest bit is `w`
+
+`(x << w) - (x << m)` = - x << m
+
+== Practice 2.40
+
+|===
+|K|shifts|Add/Subs|Expression
+|6|2|1|(x << 2) + (x << 1)
+|31|1|1|(x << 5) - x
+|-6|2|1|(x << 1) - (x << 8)
+|55|2|2|(x << 6) - (x << 3) - 1
+|===
+
+
+== Pratice 2.41
+
+if n = m, A requires 1 shift, B requires 2 shift and 1 sub. A wins.
+if n = m + 1, A requires 2 shifts and 1 add, B requires 2 shifts and 1 sub, either wins.
+if n > m, A requires n - m + 1 > 2 shifts and n - m > 1add, B requires 2 shifts and 1 sub. B wins.
+
+== Practice 2.42
+
+[source,C]
+----
+int div16(int x) {
+    int bias = x >> 31 & 0xF;
+    return (x + bias) >> 4;
+}
+----
+
+== Practice 2.43
+
+M is 31, N is 8
+
+== Practice 2.44
+
+A. if x > 0, OK. x == 0, OK, x > stem:[TMin_w], ok, x == stem:[TMin_w], stem:[x +^t_w -1 = -2_{w - 1} - 1 + 2_{w} = 2_{w-1} - 1] > 0, Fail.
+B. if (x & 7) == 7, then lower bits of x is all 1, sign bit of (x << 29) is 1, so (x << 29 < 0), it is true
+C. it is not true for all values of x and y, for example x = (1 << 16) + 2000, x * x < 0
+D. if x > 0, then -x < 0, if x == 0, then -x == 0, it is true for all values.
+E. 
+
+|===
+|x|x > 0| -x >= 0|ok
+|0|0|1|1
+|>0|1|-|1
+|stem:[(TMin_w, 0)]|0|1|1
+|stem:[TMin_w]|0|0|0
+|===
+
+when x is stem:[TMin_w], it fails.
+
+F.
+
+True. Two's complement and unsigned addition have the same bit-level behavior.
+
+G.
+
+True. x * ~y = x * (-y - 1) = -x * y - x.
+
+ux * uy = x * y, so x * ~y + ux * uy = -x.
+
+== Practice 2.45
+
+|===
+|Fraction value|Binary representation|Decimal representation
+|stem:[\frac{1}{8}]|0.001|0.125
+|stem:[\frac{3}{4}]|0.11|0.75
+|stem:[\frac{5}{16}]|0.0101|0.3125
+|stem:[\frac{43}{16}]|10.1011|2.6875
+|stem:[\frac{9}{8}]|1.001|1.125
+|stem:[\frac{47}{8}]|101.111|5.875
+|stem:[\frac{51}{16}]|11.0011|3.185
+|===
+
+== Practice 2.46
+
+A. stem:[\underbrace{0\dots0}_{23}1100[1100\]..._2]
+B. stem:[2^{-20} * 0.1]
+C. 100h = 100 * 3600s = 100 * 3600 * 10 clocks
+
+100* 3600 * 10 * stem:[2 ^ {-20} * 0.1] stem:[\approx] 0.343s
+D. 2000 * 0.343s = 686
+
+== Practice 2.47
+
+|===
+|Bits|e|E|stem:[2^E]|f|M|stem:[2^E \times M]|V|Decimal
+
+|00000|0|0|1|0|0|0|0|0.0
+
+|00001|0|0|1|stem:[\frac{1}{4}]|stem:[\frac{1}{4}]|stem:[\frac{1}{4}]|stem:[\frac{1}{4}]|0.25
+|00010|0|0|1|stem:[\frac{1}{2}]|stem:[\frac{1}{2}]|stem:[\frac{1}{2}]|stem:[\frac{1}{2}]|0.5
+|00011|0|0|1|stem:[\frac{3}{4}]|stem:[\frac{3}{4}]|stem:[\frac{3}{4}]|stem:[\frac{3}{4}]|0.75
+|00100|1|0|1|0|1|1|1|1.0
+|00101|1|0|1|stem:[\frac{1}{4}]|stem:[\frac{5}{4}]|stem:[\frac{5}{4}]|stem:[\frac{5}{4}]|1.25
+|00110|1|0|1|stem:[\frac{1}{2}]|stem:[\frac{3}{2}]|stem:[\frac{3}{2}]|stem:[\frac{3}{2}]|1.5
+|00111|1|0|1|stem:[\frac{3}{4}]|stem:[\frac{7}{4}]|stem:[\frac{7}{4}]|stem:[\frac{7}{4}]|1.75
+|01000|2|1|2|0|1|2|2|2.0
+|01001|2|1|2|stem:[\frac{1}{4}]|stem:[\frac{5}{4}]|stem:[\frac{5}{2}]|stem:[\frac{5}{2}]|2.5
+|01010|2|1|2|stem:[\frac{1}{2}]|stem:[\frac{3}{2}]|3|3|3.0
+|01011|2|1|2|stem:[\frac{3}{4}]|stem:[\frac{7}{4}]|stem:[\frac{7}{2}]|stem:[\frac{7}{2}]|3.5
+|01100|-|-|-|-|-|-|stem:[+\infty]|-
+|01101|-|-|-|-|-|-|Nan|-
+|01110|-|-|-|-|-|-|Nan|-
+|01111|-|-|-|-|-|-|Nan|-
+|===
+
+== Practice 2.48
+
+0b01001010010101100100010100000100, the frac part is
+`10101100100010100000100`, exp part is `0b10010100` = 148, E is (148 - 127) = 21, f = stem:[{\frac{5653754}{2^{23}}}] , M = 1 + f
+
+stem:[2^E * M = 2 ^ E * (1 + f) = 2 ^ E + \frac{5653754}{4}] = 3510593. 
+
+== Practice 2.49
+
+A. 
+let x be the smallest positive floating point integer that needs (n+1)-bit fraction, then:
+
+x = stem:[2^{2-2^{k-1}} * (1 - 2^{-n-1})], 
+
+B. 
+
+stem:[2^{2-2^7} * (1 - 2^{-24}) = 2^{-126} * (1 - 2^{-24})]
+
+== Practice 2.50
+
+[cols="1,1,1,1,1"]
+|===
+2+|Origin
+2+|Rounded
+|desc
+|stem:[10.010_2]|stem:[2\frac{1}{4}]|stem:[10.0]|2|halfway beween 2 and 2.5
+|stem:[10.011_2]|stem:[2\frac{3}{8}]|stem:[10.1_2]|2.5|not halfway
+|stem:[10.110_2]|stem:[2\frac{3}{4}]|stem:[11.0_2]|3|halfway between 2.5 and 3
+|stem:[11.001_2]|stem:[3\frac{1}{8}]|stem:[11.0_2]|3|not halfway
+|===
+
+Note: round-to-even only applies when on halfway.
+
+== Practice 2.51
+
+A. 
+
+stem:[x^{'} = 0.00011001100110011001101_2]
+
+stem:[x^{'} - 0.1 = 0.\underbrace{0\dots0}_{25}[1100\]_2 \approx 2^{-22} \times 0.1 \approx 2.38 * 10 ^ {-8}] 
+
+C. 
+
+stem:[100 * 3600 * 10 * 2.38 * 10 ^{-8} \approx 0.08568s] 
+
+D.
+
+stem:[2000 * 0.08568 \approx 171m]
+
+== Practice 2.52
+
+[cols="1,1,1,1"]
+|===
+2+|Format A
+2+|Format B
+
+|Bits|Value|Bits|Value
+
+|0110000|1|0111000|1
+|1011110|stem:[\frac{15}{2}]|1001111|stem:[\frac{15}{12}]
+|0101001|stem:[\frac{25}{32}]|0110100|stem:[\frac{24}{32}]
+|1101111|stem:[\frac{31}{2}]|1011000|16
+|0000001|stem:[2^{-6}]|0001000|stem:[2^{-6}]
+|===
+
+We could find, for normalized values of format B, stem:[2^E \in [2^{-6}, 2^7\]], stem:[M \in [1, \frac{15}{8}\]], so:
+
+== Practice 2.53
+
+[source,C]
+----
+#define POS_INFINITY 
+----
+
+|===
+|E|stem:[2^E]|Value Range
+|-6|stem:[\frac{1}{64}]|stem:[[\frac{1}{64}, \frac{15}{512}\]]
+|-5|stem:[\frac{1}{32}]|stem:[[\frac{1}{32}, \frac{15}{256}\]]
+|-4|stem:[\frac{1}{16}]|stem:[[\frac{1}{16}, \frac{15}{128}\]]
+|-3|stem:[\frac{1}{8}]|stem:[[\frac{1}{8}, \frac{15}{64}\]]
+|-2|stem:[\frac{1}{4}]|stem:[[\frac{1}{4}, \frac{15}{32}\]]
+|-1|stem:[\frac{1}{2}]|stem:[[\frac{1}{2}, \frac{15}{16}\]]
+|0|1|stem:[[1, \frac{15}{8}\]]
+|1|2|stem:[[2, \frac{15}{4}\]]
+|2|4|stem:[[4, \frac{15}{2}\]]
+|3|8|[8, 15]
+|4|16|[16, 30]
+|===
+
+
+== Practice 2.54
+
+A. 
+true, since double has higher precision
+
+B. 
+false, (float)stem:[TMax_w] round up to stem:[2^31], 
+
+stem:[TMax_w] resides between stem:[2^{30}*(2 - 2^{-23}) = 2 ^{31} - 2^7] and stem:[2^{31}*(1 + 0)= 2^{31}], so it rounds up to stem:[2^31].
+
+stem:[(int)(2^{31}.0) \neq TMax_w] 
+
+
+C. 
+false, if d is 1e40, (float)gives stem:[+\infty]
+
+D. 
+true
+
+E.
+true
+
+F.
+true, both 1 and 2 are converted to double before divide.
+
+G. 
+true
+
+H.
+false
+
+== Practice 2.58
+
+[source,C]
+----
+int is_litte_endian()
+{
+    short x = 1;
+    return *(char *)&x == 1;
+}
+----
+
+== Practice 2.59
+
+[source,C]
+----
+int mix_x_y(int x, int y)
+{
+    return (x & 0xFF) | (y & ~0xFF);
+}
+----
+
+== Practice 2.60
+
+[source,C]
+----
+unsigned replace_byte(unsigned x, int i, unsigned char b)
+{
+    unsigned mask = 127 << (i * 8);
+    return (x & ~mask) | (b << (i * 8));
+}
+----
+
+== Practice 2.61
+
+A. 
+
+[source,C]
+----
+x & ~0 != 0
+----
+
+B.
+
+[source,C]
+----
+x != -1
+----
+
+C.
+
+[source,c]
+----
+(x & 0xff) & ~0 != 0
+----
+
+D.
+
+[source,c]
+----
+(x >> (0xff << ((sizeof(int)-1) << 3))) != -1
+----
+
+== Practice 2.62
+
+[source,C]
+----
+int int_shifts_are_arithmetic() {
+    int x = -1;
+    return (x >> 8) == -1;
+}
+----
+
+== Practice 2.63
+
+[source,C]
+----
+unsigned sr1(unsigned x, int k)
+{
+    unsigned xsra = (int)x >> k;
+    int w = (sizeof(int) << 3);
+    return xsra & ((1 << (w - k)) - 1);
+}
+
+int sra(int x, int k)
+{
+    int xsrl = (unsigned)x >> k;
+    int w = (sizeof(int) << 3);
+    unsigned mask = ~((1 << (w - k)) - 1);
+    int sign_bit = (unsigned)x >> (w - 1);
+    mask &= -sign_bit;
+    return xsrl | mask;
+}
+----
+
+== Practice 2.64
+
+[source,C]
+----
+int any_odd_one(unsigned x)
+{
+    return (x & 0xaaaaaaaa) != 0;
+}
+----
+
+== Practice 2.65
+
+[source,C]
+----
+int odd_ones(unsigned x)
+{
+    x ^= x >> 16;
+    x ^= x >> 8;
+    x ^= x >> 4;
+    x ^= x >> 2;
+    x ^= x >> 1;
+    return x & 1;
+}
+----
+
+Here we use a parellism trick, the straightforward way is 
+
+stem:[x_{31}\text{^}x_{30}\text{^}\dots\text{^}x_0 \& 1]
+
+just observe `x ^= x >> 16`, this actually gives,
+
+stem:[(x_{31}\text{^}x_{15}),(x_{30}\text{^}x_{14}),\dots,(x_{16}\text{^}x_{0})]
+
+== Practice 2.66
+
+[source,C]
+----
+int leftmost_one(unsigned x)
+{
+    x |= x >> 1;
+    x |= x >> 2;
+    x |= x >> 4;
+    x |= x >> 8;
+
+    return (x >> 1) + (x && 1);
+}
+----
+
+let stem:[\vec{x}] be stem:[[0\dots01\dots\]], stem:[\overrightarrow{x|(x>>1)}] gives stem:[[0\dots011\dots]], stem:[\overrightarrow{x|(x>>2)}] gives stem:[[0\dots01111\dots]], continue the process, will gives stem:[[0\dots011\dots1\]].
+
+`x && 1` handles the case when x = 0.
+
+== Practice 2.67
+
+A. 
+
+shift count > width of type
+
+B. 
+
+[source,C]
+----
+int int_size_is_32()
+{
+    int set_msb = 1 << 31;
+    int beyond_msb = set_msb << 1;
+    return set_msb && !beyond_msb;
+}
+----
+
+C. 
+
+[source,C]
+----
+int int_size_is_32()
+{
+    int set_msb = ((unsigned)-1 >> 1) + 1;
+    int beyond_msb = set_msb << 1;
+    return set_msb && !beyond_msb;
+}
+----
+
+== Practice 2.68
+
+[source,C] 
+----
+int lower_one_mask(int n)
+{
+    int w = sizeof(int) << 3;
+    return (unsigned)-1 >> (w - n)
+}
+----
+
+== Practice 2.69
+
+[source,C]
+----
+unsigned rotate_left(unsigned x, int n)
+{
+    int w = sizeof(x) << 3;
+    return (x << n) | x >> (w - n - 1) >> 1;
+}
+----
+
+== Practice 2.70
+
+[source,C]
+----
+int fits_bits(int x, int n)
+{
+    int w = sizeof(int) << 3;
+    // offset is in range [0, w - 1]
+    int offset = w - n;
+    // if len(\vec{x}) > n, then x << offset must overflow
+    return (x << offset >> offset) == x
+}
+----
+
+
+== Practice 2.71
+
+A.
+
+we are told that 4 **signed bytes** are packed into 32-bit `unsigned`, the return value of `xbyte` is `unsigned`, 
+then converted to int of which range is stem:[-2^31, 2^31 - 1], recall that
+
+stem:[U2T_{32}(x) = x] when x in range stem:[-2^31, 2^31 - 1]. So all the bytes are **unsigned**.
+
+B.
+[source,C]
+----
+int xbyte(unsigned word, int bytenum)
+{
+    int maxbyte = 3;
+    // move the designated byte to the most significant byte
+    word <<= ((maxbyte - bytenum) << 3);
+    return word >> (bytenum << 3)
+}
+----
+
+== Practice 2.72
+
+A. Arithmetic operations involving signed and unsigned value, signed value are converted to unsigned value at first, and the
+result is also *unsigned*.
+
+B. 
+
+[source,C]
+----
+“/* Copy integer into buffer if space is available */
+/* WARNING: The following code is buggy */
+void copy_int(int val, void *buf, int maxbytes) {
+	if (maxbytes >= (int)sizeof(val))
+		memcpy(buf, (void *) &val, sizeof(val));
+}
+----
+
+== Practice 2.73
+
+[source,C]
+----
+int saturating_add(int x, int y)
+{
+    unsigned r = (unsigned)x + y;
+    int w = sizeof(int) << 3;
+    bool x_is_minus = (x & INT_MIN);
+    bool y_is_minus = (y & INT_MIN);
+
+    int both_minus = (x_is_minus && y_is_minus);
+    int both_pos = (!x_is_minus && !y_is_minus);
+
+    // ~0 if neg_overflow, 0 otherwise
+    unsigned neg_overflow = ~((both_minus && !(r & INT_MIN)) - 1);
+
+    // ~0 if pos_overflow, 0 otherwise
+    int pos_overflow = ~((both_pos && (r & INT_MIN)) - 1);
+    // ~0 is !(neg_overflow || pos_overflow), 0 otherwise
+    int no_overflow = ~(neg_overflow | pos_overflow);
+
+    int TMax = (1 << (w - 1)) - 1;
+    int TMin = -(1 << (w - 1));
+
+    return (pos_overflow & TMax) | (neg_overflow & TMin) | (no_overflow & r);
+}
+----
+
+== Practice 2.74
+
+[source,C]
+----
+int tsub_ok(int x, int y)
+{
+    int sub = x - y;
+    int pos_over = x >= 0 && y < 0 && sub < 0;
+    int neg_over = x < 0 && y > 0 && sub > 0;
+
+    return !(pos_over || neg_over);
+}
+----
+
+== Practice 2.75
+
+[source,C]
+----
+unsigned unsigned_high_prod(unsigned x, unsigned y) {
+    int x_sign_bit = x >> 31;
+    int y_sign_bit = y >> 31;
+    return signed_high_prod(x, y) + x * y_sign_bit + y * x_sign_bit;
+}
+----
+
+stem:[x^{'} * y^{'} = (x + x_{w-1}2^w) * (y + y_{w-1}2^w) = x \cdot y + 2^w(x \cdot y_{w-1} + y \cdot x_{w-1}) + 2^{2w}x_{w-1}y_{w-1}]
+
+stem:[(x^{'} * y^{'}) mod 2^{w} = x \cdot y + 2^w(x \cdot y_{w-1} + y \cdot x_{w-1})] 
+
+== Practice 2.76
+
+[source,C]
+----
+void *calloc(size_t nmemb, size_t size)
+{
+    if (nmemb == 0 || size == 0)
+    {
+        return NULL;
+    }
+    size_t n = nmemb * size;
+    if (n / nmemb != size)
+    {
+        return NULL;
+    }
+    void *ret = malloc(n);
+    if (ret == NULL)
+    {
+        return NULL;
+    }
+    return memset(ret, 0, n);
+}
+----
+
+== Practice 2.77
+
+A. 
+
+[source,C]
+----
+// 17 = 2 ^ 4 + 1
+(x << 4) + x
+----
+
+B.
+
+[source,C]
+----
+// -7 = 1 - 2 ^ 3
+x - x << 3
+----
+
+C.
+
+[source,C]
+----
+// 60 = 2 ^ 6 - 2 ^ 2
+(x << 6) - (x << 2)
+----
+
+D.
+
+[source,C]
+----
+// -112 = 2 ^ 4 - 2 ^ 7
+(x << 4) - (x << 7)
+----
+
+== Practice 2.78
+
+[source,C]
+----
+int divide_power2(int x, int k)
+{
+    int minus = !!(x & INT_MIN);
+    int fix = ~(minus - 1) & -1;
+    return (x + fix) >> k;
+}
+----
+
+== Practice 2.80
+
+[source,C]
+----
+int threefourths(int x)
+{
+    int positive = !(x & INT_MIN);
+    positive = ~(positive - 1);
+    int bias = positive & -1;
+    return x - (((x + bias) >> 2) - (positive & 1));
+}
+----
+
+== Pracice 3.1
+
+|===
+|Operand|Value
+|%rax|0x100
+|0x104|0xAB
+|$0x108|0x108
+|(%rax)|0xFF
+|4(%rax)|0xAB
+|9(%rax,%rdx)|0x11
+|260(%rcx,%rdx)|0x13
+|0xFC(,%rcx,4)|0xff
+|(%rax,%rdx,4)|0x11
+|===
+
+== Pracice 3.2
+
+[source,assembly]
+----
+movl %eax, (%rsp)
+movw (%rax), %dx
+movb $0xff, %bl
+movb (%rsp, %rdx, 4), %dl
+movq (%rdx), %rax
+movw %dx, (%rax)
+----
+
+== Practice 3.3
+
+[source,assembly]
+----
+movb $0xF, (%ebx) ; register ebx can't be used as address
+movl %rax, (%rsp) ; mismatch between instruction suffix and operand (rax) size
+movw (%rax), 4(%rsp) ; can't move between memory and memory
+movb $al, %sl ; no such register sl
+movq %rax, $0x123 ; destination operand can't be immediate
+movl %eax,%dx ; mismatch between instruction suffix and operand (dx) size
+movb %si, 8(%rbp) ; mistmatch between instruction suffix and operand (si) size
+----
+
+== Practice 3.4
+
+assume sp is put in register %rdi, dp is put in register %rsi
+
+|===
+|src_t|dest_t|instruction|comment
+|long|long|`movq (%rdi), %rax`|read *sp
+|||`movq %rax, (%rsi)`|write *dp
+|char|int|`movsbl (%rdi), %eax`|read *sp one byte and store in %eax
+|||`movl %eax, (%rsi)`|write 4 bytes to *dp
+|char|unsigned|`movsbl (%rdi), %eax`|read *sp and store in %eax, expand signed
+|||`movl %eax, (%rsi)`|write 4 bytes to *dp
+|unsigned char|long|`movzbq %(rdi), %rax`|read *sp (1 byte), expand it and store in %rax
+|||`movq %rax, (%rsi)`|write 8 bytes to *dp
+|int|char|`movl (%rdi), %eax`|read 4 bytes from *sp, store in %eax, no truncation
+|||`movb %al, (%rsi)`|write 1 byte to *dp, truncation happens here
+|unsigned|unsigned char|`movl (%rdi) %eax`|read 4 bytes from *sp, store in %eax
+|||`movb %al, (%rsi)`|write 1 byte to *dp, truncation happens here
+|char|short|`movsbw (%rdi), %ax`|read 2 bytes from *sp, signed-extend, store in %ax
+|||`movw %ax, (%rsi)`|write 2 bytes to *dp
+|===
+
+== Practice 3.5
+
+[source,C]
+----
+void decode1(long *xp, long *yp, long *zp) {
+    long x = *xp;
+    long y = *yp;
+    long z = *zp;
+
+    *yp = x;
+    *zp = y;
+    *xp = z;
+}
+----
+
+== Practice 3.6
+
+%rax holds value x, %rcx holds value y.
+
+|===
+|Instruction|Result
+|`leaq 6(%rax), %rdx`|x + 6
+|`leaq (%rax,%rcx), %rdx`|x + y
+|`leaq (%rax,%rcx,4),%rdx`|x + 4y
+|`leaq 7(%rax,%rax,8), %rdx`|7+9x
+|`leaq 0xA(,%rcx,4), %rdx`|0xA + 4y
+|`leaq 9(%rax, %rdx,2) %rdx`|9 + x + 2y
+|===
+
+== Pracice 3.7
+
+[source,assemly]
+----
+  long scale2(long x, long y, long z)
+  x in %rdi, y in %rsi, z in %rdx
+scale2:
+  leaq	(%rdi,%rdi,4), %rax  ; %rax hold 5 * x
+  leaq	(%rax,%rsi,2), %rax ; %rax hold 5 * x + 2 * y
+  leaq (%rax,%rdx,8), %rax ; %rax hold (5 * x + 2 * y + 8 * z)
+  ret”
+----
+
+So the answer is `5 * x + 2 * y + 8 * z`
+
+== Practice 3.8
+
+|===
+|Instruction|Destination|Value
+|addq %rcx, (%rax)|M[0x100]|0x100
+|subq %rdx, 8(%rax)|M[0x108]|0xA8
+|imulq $16,(%rax,%rdx,8)|M[0x118]|0x110
+|incq 16(%rax)|M[0x110]|0x14
+|decq %rcx|%rcx|0x0
+|subq %rdx,%rax|%rax|0xFD
+|===
+
+== Practice 3.9
+
+[source,assembly]
+----
+    long shift_left4_rightn(long x, long n)
+    x in %rdi, n in %rsi
+shift_left4_rightn:
+    movq %rdi, %rax ; %rax hold x
+    salq $4, %rax ; %rax hold x << 4
+    movl %esi, %ecx ; %ecx hold n
+    sarq %cl, %rax ; %rax hold x << 4 >> n    
+----
+
+== Practice 3.10
+
+[source,C]
+----
+long arith2(long x, long y, long z) {
+    long t1 = x | y;
+    long t2 = t1 >> 3;
+    long t3 = ~t2;
+    long t4 = z - t3;
+    return ret;
+}
+----
+
+== Practice 3.12
+
+[source,C]
+----
+void uremdiv(long x, long y, long *qp, long *rp) {
+    unsigned long q = x / y;
+    unsigned long r = x % y;
+    *qp = q;
+    *rp = r;
+}
+----
+
+[source,assembly]
+----
+    void uremdiv(long x, long y, long *qp, long *rp)
+    x in %rdi, y in %rsi, qp in %rdx, rp in %rcx
+remdiv:
+    movq %rdx, %r8 ; %r8 hold qp
+    movq %rdi, %rax ; %rax hold x
+    xorq %rdx, %rdx ; %rdx hold 0
+    divq %rsi ; %rax hold q, %rdx hold r
+    movq %rax, (%r8) ; store q to *qp
+    movq %rdx, (%rcx) ; store r to *rp
+    ret
+----
+
+== Practice 3.13
+
+
+A. int, <
+B. short, >=
+C. unsigned char, \<=
+D. long/unsigned long, !=
+
+== Pracice 3.14
+
+A. long
+B. (unsigned) short
+C. unsigned char
+D. int
+
+== Practice 3.15
+
+A. 4003fe
+B. 400425
+C. 400543,400545
+D. 400560 
+
+== Pracice 3.16
+
+[source,C]
+----
+void cond(long a, long *p) {
+    if (!p && a > *p) {
+        goto done;
+    }
+    *p = a;
+done:
+    return;
+}
+----
+
+== Practice 3.17
+
+[source,C]
+----
+long absdiff_se(long x, longy ) {
+    long result;
+    if (x < y) {
+        goto x_lt_y;
+    }
+    ge_cnt++;
+    result = x - y;
+    goto done;
+x_lt_y:
+    lt_cnt++;
+    result = y - x;
+done:
+    return result;
+}
+----
+
+== Practice 3.18
+
+[source,C]
+----
+long test(long x, long y, long z) {
+    long val = x + y + z;
+    if ( x < -3) {
+        if (z < y) {
+            val = y * x;
+        } else {
+            val = y * z;
+        }
+    } else if (x > 2) {
+        val = x * z;
+    }
+    return val;
+}
+----
+
+== Practice 3.19
+
+A. 
+
+stem:[T_{ran} = T_{ok} + P * T_{mp}], here stem:[T_{ran}] is 31, stem:[T_{ok}] is 16, P is 0.5, so:
+
+stem:[T_{mp} = (T_{ran} - T_{ok}) / P = 2 * (31 - 16) / 0.5 = 30]
+
+B. 
+stem:[T_{ok} + T_{mp} = 16 + 30 = 46]
+
+== Practice 3.20
+
+A. 
+
+B. 
+
+[source,assembly]
+----
+	long arith(long x)
+	x in %rdi
+arith:
+  leaq 7(%rdi), %rax ; %rax hold x + 7
+  testq %rdi, %rdi
+  cmovns %rdi, %rax ; if x >= 0, %rax hold x, else %rax hold x + 7
+  sarq $3, %rax ; %rax >> 3
+  ret
+----
+
+== Practice 3.21
+
+[source,C]
+---
+long test(long x, long y) {
+    long val = x * 8;
+    if (y > 0) {
+        if (x >= y) {
+            val = x & y;
+        } else {
+            val = y - x;
+        }
+    } else if (y >= -2) {
+        val = x + y;
+    }
+    return val;
+}
+---
+
+== Practice 3.23
+
+A.  
+
+x:: %rax
+y:: %rcx
+n:: %rdx 
+
+B. 
+
+`*p` is x, so `x += y; (*p)++` equals to `x = x + y + 1`
+
+C. 
+
+[source,assembly]
+----
+	long dw_loop(long x)
+	x initially in %rdi
+1	dw_loop:
+2	  movq	%rdi, %rax ; %rax hold x
+3	  movq	%rdi, %rcx ; %rcx hold x
+4	  imulq	%rdi, %rcx ; %rcx hold x * x
+5	  leaq	(%rdi,%rdi), %rdx ; %rdx hold 2 * x
+6	.L2:
+7	  leaq	1(%rcx,%rax), %rax ; %rax hold x * x + x + 1
+8	  subq	$1, %rdx ; n--
+9	  testq	%rdx, %rdx
+10	  jg	.L2 ; if n > 0, goto .L2
+11	  rep; ret
+----
+
+== Practice 3.24
+
+[source,C]
+----
+long loop_while(long a, long b) {
+    long result = 1;
+    while (a < b) {
+        result = result * (a + b); 
+        a = a + 1;
+    }
+    return result;
+}
+----
+
+== Practice 3.25
+
+[source,C]
+----
+long loop_while2(long a, long b) {
+    long result = b;
+    while (b > 0) {
+        result = result * a;
+        b = b - a;
+    }
+    return result;
+}
+----
+
+== Practice 3.26
+
+A. jump to middle
+B.
+
+[source,C]
+----
+long fun_a(unsigned long x) {
+    long val = 0;
+    while (x != 0) {
+        val = val ^ x;
+        x = x >> 1;
+    }
+    return val & 1;
+}
+----
+
+== Practice 3.27
+
+[source,C]
+----
+long fact_goto(long n) {
+    long i = 2;
+    long result = 1;
+    if (i > n) {
+        goto done;
+    }
+loop:
+    result *= i;
+    ++i
+    if (i <= n) {
+        goto loop;
+    }
+done:
+    return result;
+}
+----
+
+== Practice 3.28
+
+A.  
+
+[source,c]
+----
+long fun_b(unsigned long x) {
+    long val = 0;
+    long i;
+    for (i=64; i != 1; i--) {
+        val = (val + val) | (x & 1)
+        x = x >> 1; 
+    }
+    return val;
+}
+----
+
+B. 
+initial test is passed by by default(64 != 1), so no need to test it again
+
+== Pratice 3.29
+
+[source,C]
+----
+long sum = 0;
+long i = 0;
+while (i < 10) {
+    if (i & 1) {
+        goto update;
+    }
+    sum += i;
+update:
+    ++i;
+}
+----
+
+== Practice 3.30
+
+A. -1,0,1,2,_,4,5,_,7
+
+B. labels 2 and 4 have case .L7, labels 0, 7 have case .L5
+
+== Practice 3.31
+
+[source,C]
+----
+void switcher(long a, long b, long c, long *dest) {
+    long val;
+    switch (a) {
+    case 5:
+        c = b ^ 15;
+    case 0:
+        val = c + 112:
+        break;
+    case 2:
+    case 7:
+        val =  (c + b) << 2
+        break;
+    case 4:
+        val = a;
+        break;
+    default: 
+        val = b;
+    }
+    *dest = val;
+}
+----
+
+== Practice 3.32
+
+[cols="1,1,1,1,1,1,1,1,1"]
+|===
+3+|Instruction
+5+|State values(at beginning)|
+
+|Label|PC|Instruction|%rdi|%rsi|%rax|%rsp|*%rsp|Description
+
+|M1|0x400560|callq|10|-|-|0x7fffffffe820|-|call first(10)
+|F1|0x400548|lea|10|-|-|0x7fffffffe818|400565|let %rsi = 11
+|F2|0x40054c|sub|9|11|-|0x7fffffffe818|400565|let %rdi = 9
+|F3|0x400550|callq|9|11|-|0x7fffffffe818|400565|call last(9, 11)
+|L1|0x400540|mov|9|11|-|0x7fffffffe810|400555|let %rax = 9
+|l2|0x400543|imul|9|11|9|0x7fffffffe810|400555|let %rax = 9 * 9
+|L3|0x400547|retq|9|11|99|0x7fffffffe810|400555|return 99
+|F4|0x400555|retq|9|11|99|0x7fffffffe818|400565|return 99
+|M2|0x400565|mov|9|11|99|0x7fffffffe820|-|let %rdx = 99
+
+|===
+
+== Practice 3.33
+
+[source,C]
+----
+size_t procprop(
+   int a,
+   short b,
+   long *u,
+    char * v
+) {
+    *u += a;
+    *v += b;
+    return sizeof(a) + sizeof(b);
+}
+----
+
+== Practice 3.34
+
+A. %r15, %r14, %r13, %12, %rbp, %rbx
+B. a6 in (%rsp), a7 in 8(%rsp)
+C. It has used all 6 callee-saved registers to store a0-a5, so it has to save a6 and a7 on stack
+
+== Practice 3.35
+
+A. x
+
+B.
+[source,C]
+----
+long rfun(unsigned long x) {
+    if (x == 0) {
+        return 0;
+    }
+    unsigned long nx = x >> 2;
+    long rv = rfun(nx);
+    return x + rv;
+}
+----
+
+== Practice 3.36
+
+|===
+|Array|Element size|Total size|Start address|Element i
+
+|S|2|14|stem:[X_s]|stem:[X_s + 2i]
+
+|T|8|24|stem:[X_t]|stem:[X_t + 8i]
+
+|U|8|48|stem:[X_u]|stem:[X_u + 8i]
+
+|V|4|32|stem:[X_v]|stem:[X_v + 4i]
+
+|W|8|32|stem:[X_w]|stem:[X_w + 8i]
+|===
+
+== Practice 3.37
+
+|===
+
+|Expression|Type|Value|Assembly code
+
+|S+1|short *|stem:[X_s + 2] |`leaq 2(%rdx) %rax`
+|S[3]|short|stem:[M[X_s + 6]]|`movw 6(%rdx) %ax`
+|&S[i]|short *|stem:[X_s + 2i]|`leaq (%rdx,%rcx, 2) %ax`
+|S[4*i + 1]|short|stem:[M[X_s + 8i + 2]|`movw 2(%rdx, %rcx, 8) %ax`
+|S+i-5|short *|stem:[X_s + 2i - 10]`leaq -10(%rdx, %rcx, 2) %ax`
+|===
+
+== Praciice 3.38
+
+M is 5, N is 7
+
+== Practice 3.40
+
+[source,C]
+----
+void fix_set_diag_opt(fix_matrix A, int val) {
+    int * a_ptr = &A[0][0];
+    int * a_end = a_ptr + N * N + N; // that is &A[N][N], N * N + N
+    do {
+        *a_ptr = val;
+        a_ptr += N + 1;
+    } while (a_ptr != a_end);
+}
+----
+
+== Practice 3.41
+
+
+A.
+
+|===
+|p|0
+|s.x|8
+|s.y|12
+|next|16
+|===
+
+B. 
+
+24
+
+C. 
+
+[source,C]
+----
+void sp_init(struct prob *sp) {
+    sp->s.x = sp->s.y;
+    sp->p = &(sp->s.x);
+    sp->next = sp;
+}
+----
+
+== Practice 3.42
+
+[source,C]
+----
+long fun(struct ELE *ptr) {
+    long result = 0;
+    while (ptr != NULL) {
+        result += ptr->v;
+        ptr = ptr->p;
+    }
+    return result;
+}
+----
+== Practice 3.43
+
+
+|===
+|Expr|Type|Code
+
+|up->t1.u|long|`movq (%rdi), %rax +
+movq %rax,(%rsi)`
+|up->t1.v|short|`movw 8(%rdi), %ax +
+movw %ax, (%rsi)`
+|up->t1.w|char|`movb 10(%rdi), %al +
+movb %al, (%rsi)`
+|up->t2.a|int *|`movq (%rdi), %rax +
+movq %rax, (%rsi)`
+|up->t2.a[up->t1.u]|int|`movq (%rdi), %rax +
+movl (%rdi, %rax, 4), %eax +
+movl %eax,(%rsi)`
+|*up->t2.p|char|`movq 8(%rdi), %rax +
+movb (%rax), %al +
+movb %al, (%rsi)`|
+|===
+
+== Practice 3.44
+
+A.
+
+[source,C]
+----
+struct P1 {
+    int i; // 0
+    char c; // 4
+    int j; // 8
+    char d; // 12
+};
+
+sizeof P1 = 16;
+----
+alignment is 4
+
+B. 
+
+[source,C]
+----
+struct P2 {
+    int i; // 0
+    char c; // 4
+    char d; // 5
+    long j; // 8
+}
+sizeof P2 = 16;
+----
+
+alignment is 8
+
+
+
+C.
+
+[source,C]
+----
+struct P3 {
+    short w[3]; // 0
+    char c[3]; // 6
+};
+sizeof P3 = 10
+----
+
+, alignment is 2
+
+D.
+
+[source,C]
+----
+struct P4 {
+    char w[5]; // 0
+    char *c[3]; // 12
+};
+
+sizeof P4 = 40;
+----
+alignment is 8
+
+E.
+
+
+[source,C]
+----
+struct P5 {
+    struct P3 a[2]; // 0
+    struct P2 t; // 24
+}
+sizeof P5 = 40;
+----
+
+alignment is 86
+
+== Practice 3.45
+
+A.
+
+[source,C]
+----
+struct {
+    char *a; // 0
+    short b; // 8
+    double c; // 16
+    char d; // 24
+    float e; // 28 
+    char f; // 32
+    long g; // 40
+    int h; // 48
+} rec;
+----
+
+B. 
+
+sizeof rec = 56
+
+to satisfy the alignment requirement, we need to add 4 bytes padding
+
+
+== Practice 3.46
+
+A.
+
+|===
+|00 00 00 00 00 40 00 76|Return Address
+|01 23 45 67 89 ab cd ef|%rbx
+||--
+||%rsp
+|===
+
+
+
+B. 
+
+|===
+|00 00 00 00 00 40 00 34|Return Address
+|33 32 31 30 39 38 37 36|%rbx
+|35 34 33 32 31 30 39 38|
+|37 36 35 34 33 32 31 30|%rsp
+|===
+
+C. 
+
+0x400034
+
+D.
+
+%rbx
+
+E.
+
+[source,C]
+----
+char *get_line() {
+    char buf[4];
+    char *result;
+    gets(buf);
+    result = malloc(strlen(buf) + 1); // should be strlen(buf) + 1
+    if (result != NULL) { // should test result
+        strcpy(result, buf);
+    }
+    return result;
+}
+----
+
+Practice 3.49
+
+A.
+
+when n is odd, substract stem:[8n + 8] from stem:[s_1], otherwise substract stem:[8n + 16] from stem:[s_1]
+
+if n is even, stem:[8n + 22] is 8n + 0x16, when and with -16, the last 4 bits is rounded, so it is 8n + 0x10
+
+if n is odd, stem:[8n + 22] is stem:[8(n-1) + 8 + 22 = 8(n-1) + 0x1e], when and with -16, the last 4 bits is rounded, so it is stem:[8(n-1) + 0x10 = 8n + 8]
+
+B. 
+
+up to nearest 8 bytes
+
+C.
+
+|===
+|n|stem:[s_1]|stem:[s_2]|p|stem:[e_1]|stem:[e_2]
+
+|5|2,065|2017|2024|7|1
+|6|2,064|2000|2000|16|0
+
+|===
+
+D. 
+
+stem:[s_2 = s_1 + 16n], and alignment to p is 8
+
+
+== Praciice 3.50
+
+[source,assemly]
+----
+	double fcvt2(int *ip, float *fp, double *dp, long l) ip in %rdi, fp in %rsi, dp in %rdx, l in %rcx Result returned in %xmm0
+1	fcvt2:
+2	 movl	(%rdi), %eax ; %eax = *ip
+3	 vmovss	(%rsi), %xmm0 ; %xmm0 = *fp
+4	 vcvttsd2si	(%rdx), %r8d ; %r8d = (int) *dp
+5	 movl %r8d,	(%rdi) ; *ip = (int) *dp
+6	 vcvtsi2ss	%eax, %xmm1, %xmm1 
+7	 vmovss %xmm1,	(%rsi)
+8	 vcvtsi2sdq	%rcx, %xmm1, %xmm1
+9	 vmovsd	%xmm1, (%rdx)
+10	 vunpcklps	%xmm0, %xmm0, %xmm0
+11	 vcvtps2pd	%xmm0, %xmm0
+12	 ret
+----
+
+|===
+|val1|val2|val3|val4
+|d|i|l|f
+|===
+
+== Practice 3.51
+
+|===
+|stem:[T_x]|stem:[T_y]|Instruction(s)
+|long|double|`vcvtsi2sdq %rdi, %xmm0, %xmm0`
+|double|int|`vcvttsd2si %xmm0, %eax`
+|double|float|`vunpcklps %xmm0, %xmm0, %xmm0 +
+vcvtpd2ps %xmm0, %xmm0`
+|long|float|`vcvtsi2ssq %rdi, %xmm0, %xmm0`
+|float|long|`vcvtss2siq %xmm0, %rax`
+|===
+
+== Practice 3.52
+
+A. 
+
+|===
+|a|b|c|d
+|%xmm0|%rdi|%xmm1|%esi
+|%edi|%rsi|%rdx|%rcx
+|%rdi|%xmm0|%esi|%xmm1
+|%xmm0|%rdi|%xmm1|%xmm2
+|===
+
+== Practice 3.58
+
+[source,C]
+----
+long decode2(long x, long y, long z) {
+    // x - %rdi, y - %rsi, z - %rdx
+    y -= z;
+    return (x * y) ^ (y << 63 >> 63);
+}
+----
+
+== Practice 3.59
+
+ 
+stem:[\because B2U_{64}(x) = B2T_{64}(x) + x_{63}2^{64}]
+
+brief it as stem:[ux = x + x_{63}2^{64}]
+
+stem:[\therefore ux * uy = x * y + (x * y_{63} + y * x_{63}) 2^{64} + x_{63} * y_{63} 2^{128}]
+
+128-bits overflow, ignore the part, we got:
+
+stem:[x * y = ux * uy - (x * y_{63} + y * x_{63}) 2^{64}]
+
+[source,assembly]
+----
+store_prod:
+    ; dest in %rdi, x in %rsi, y in %rdx
+    movq	%rdx, %rax ; %rax = y
+    cqto	; %rdx:%rax = y, %rdx = -y_{63}
+    movq	%rsi, %rcx ; %rcx = x
+    sarq	$63, %rcx ; %rcx = x >> 63, %rcx = -x_{63}
+    imulq	%rax, %rcx ; %rcx = -x_{63} * y
+    imulq	%rsi, %rdx ; %rdx = x * y
+    addq	%rdx, %rcx ; %rcx = -x_{63} * y - x * y_{63}
+    mulq	%rsi ; %rdx:%rax = uy * ux
+    addq	%rcx, %rdx ; %rdx = -x_{63} * y - x * y_{63} + ux_{h} * uy_{h}
+    movq	%rax, (%rdi) ; *dest = ux_{l} * uy_{l}
+    movq	%rdx, 8(%rdi) ; *(dest + 1) = -x_{63} * y - x * y_{63} + ux_{h} * uy_{h}
+    ret
+----
+
+== Practice 3.60
+
+[source,assemly]
+----
+	long loop(long x, int n)
+	x in %rdi, n in %esi
+1	loop:
+2	  movl	%esi, %ecx ; %ecx = n
+3	  movl	$1, %edx ; %edx = 1
+4	  movl	$0, %eax ; %eax = 0
+5	  jmp	.L2
+6	.L3:
+7	  movq	%rdi, %r8 ; %r8 = x
+8	  andq	%rdx, %r8 ; %r8 = x & %rdx
+9	  orq	%r8, %rax ; %rax = %rax | %r8
+10	  salq	%cl, %rdx ; %rdx = %rdx << %cl
+11	.L2:
+12	  testq	%rdx, %rdx 
+13	  jne	.L3 ; if %rdx != 0, goto .L
+14	  rep; ret
+----
+
+A. 
+
+// create a table with columns "x", "n", "result" and "mask"
+|===
+|x|n|result|mask
+|%rdi|%rsi|%rax|%rdx
+|===
+
+B.
+
+result = 0;
+mask = 1;
+
+C. 
+
+mask != 0
+
+D.
+
+mask = mask << n;
+
+E.
+
+result |= x & mask;
+
+F.
+
+
+[source,C]
+----
+long loop(long x, long n) {
+    long result = 0;
+    long mask;
+    for (mask = 1; mask != 0; mask <<= n) {
+        result |= x & mask;
+    }
+    return result;
+}
+----
+
+== Practice 3.61
+
+[source,C]
+----
+long cread_alt(long *xp) {
+    return (!xp ? 0 : *xp);
+}
+----
+
+[source,assembly]
+----
+cread_alt:
+    movl $0, %eax ; %eax = 0
+    testq %rdi, %rdi
+    cmovne (%rdi), %rax ; return *p is p is non-null
+----
+
+== Practice 3.62
+
+[source,C]
+----
+typedef enum {MODE_A, MODE_B, MODE_C, MODE_D, MODE_E} mode_t;
+
+long switch3(long *p1, long *p2, mode_t action) {
+    long result = 0;
+    switch (action) {
+        case MODE_A:
+            result = *p2;
+            *ps = *p1;
+            break;
+        case MODE_B:
+            result = *p1 + *p2;
+            *p1 = result;
+            break;
+        case MODE_C:
+            *p1 = 59
+            result = *p2;
+            break;
+        case MODE_D:
+            *p1 = *p2;
+            result = 27;
+            break;
+        case MODE_E:
+            result = 27;
+            break;
+        default:
+            result = 12;
+            break;
+    }
+    return result;
+}
+----
+
+== Practice 3.63
+
+[source,assembly]
+----
+long switch_prob(long x, long n)
+	x in %rdi, n in %rsi
+1	0000000000400590 <switch_prob>:
+2	400590: 48 83 ee 3c	sub	$0x3c,%rsi
+3	400594: 48 83 fe 05	cmp	$0x5,%rsi
+4	400598: 77 29	ja	4005c3 <switch_prob+0x33>
+5	40059a: ff 24 f5 f8 06 40 00	jmpq	*0x4006f8(,%rsi,8)
+6	4005a1: 48 8d 04 fd 00 00 00	lea	0x0(,%rdi,8),%rax
+7	4005a8: 00
+8	4005a9: c3	retq
+9	4005aa: 4889f8	mov	%rdi,%rax
+10	4005ad: 48 c1 f8 03	sar	$0x3,%rax
+11	4005b1: c3	retq
+12	4005b2: 4889f8	mov	%rdi,%rax
+13	4005b5: 48 c1 e0 04	shl	$0x4,%rax
+14	4005b9: 4829f8	sub	%rdi,%rax
+15	4005bc: 4889c7	mov	%rax,%rdi
+16	4005bf: 48 0f af ff	imul	%rdi,%rdi
+17	4005c3: 48 8d 47 4b	lea	0x4b(%rdi),%rax ; default
+18	4005c7: c3	retq
+----
+
+[source,C] 
+----
+long switch_prob(long x, long y) {
+    long result = x;
+    switch (n) {
+        case 0x3c:
+        case 0x3e:
+            result= x * 8;
+            break;        
+        case 0x3f:
+            result = x >> 3;
+            break; 
+        case 0x40:
+            x = (x << 4) - x;
+        case 0x41:
+            x *= x;
+        default:
+            result = x + 0x4b;
+            break;
+    }
+    return result;
+}
+----
+
+== Practice 3.64
+
+A.
+
+stem:[\&D[i\][j\] = x_{D} + L(i \cdot C + j) ]
+
+here L is the size of data type T in bytes, C is the number of columns.
+
+define D as stem:[D[R\][S\][T\]]
+
+stem:[\&D[i\][j\][k\] = x_{D} + L(i \cdot S \cdot T + j \cdot T + k)]
+
+B.
+
+[source,assembly]
+----
+    long store_ele(long i, long j, long k, long *dest)
+	i in %rdi, j in %rsi, k in %rdx, dest in %rcx
+1	store_ele:
+2	  leaq	(%rsi,%rsi,2), %rax ; %rax holds 3j
+3	  leaq	(%rsi,%rax,4), %rax ; %rax holds 13j
+4	  movq	%rdi, %rsi ; %rsi holds i
+5	  salq	$6, %rsi ; %rsi <<= 6
+6	  addq	%rsi, %rdi ; %rdi holds 65i
+7	  addq	%rax, %rdi ; %rdi holds 65i + 13j
+8	  addq	%rdi, %rdx ; %rdx holds 65i + 13j + k
+9	  movq	A(,%rdx,8), %rax ; A + 8 * (65i + 13j +k)
+10	  movq	%rax, (%rcx)
+11	  movl	$3640, %eax
+12	  ret
+----
+
+so T is 13, S is 5
+
+sizeof(A) = sizeof(long[R][5][13]) = 3640
+
+R = 3640 / 8 / 5 / 13 = 7
+
+== Pratice 3.65
+
+A. %rdx holds A[i][j]
+B. %rax holds A[j][i]
+C. M is 15
+
+== Practice 3.66
+
+[source,assembly]
+----
+	long sum_col(long n, long A[NR(n)][NC(n)], long j)
+	n in %rdi, A in %rsi, j in %rdx
+1	sum_col:
+2	  leaq	1(,%rdi,4), %r8 ; %r8 holds 4n + 1
+3	  leaq	(%rdi,%rdi,2), %rax ; %rax holds 3n
+4	  movq	%rax, %rdi ; %rdi holds 3n
+5	  testq	%rax, %rax
+6	  jle	.L4
+7	  salq	$3, %r8 ; %r8 holds (4n + 1)<<3 = 32n + 8
+8	  leaq	(%rsi,%rdx,8), %rcx ; %rcx holds A + 8j
+9	  movl	$0, %eax
+10	  movl	$0, %edx ; %rdx is i
+11	.L3:
+12	  addq	(%rcx), %rax ; %rax += M[A + 8j]
+13	  addq	$1, %rdx 
+14	  addq	%r8, %rcx ; %rcx += 32n + 8
+15	  cmpq	%rdi, %rdx 
+16	  jne	.L3
+17	  rep;	ret
+18	.L4:
+19	  movl	$0, %eax
+20	  ret
+----
+
+[source,C]
+----
+#define NR(n) 3n
+#define NC(n) 4n + 1
+----
+
+== Practice 3.67
+
+A. 
+
+|===
+|address|value
+|24(%rsp)|z
+|16(%rsp)|s.p
+|8(%rsp)|s.a[1]
+|%rsp|s.a[0]
+|===
+
+B. 
+
+the address where to store r, 64(%rsp)
+
+C.
+
+|===
+|8(%rsp)|16(%rsp)|24(%rsp)
+|s.a[0]|s.a[1]|s.p
+|===
+
+D.
+
+|===
+|(%rdi)|8(%rdi)|16(%rdi)
+|r.u[0]|r.u[1]|r.q
+|===
+
+E.
+
+|===
+|address|value
+
+|80(%rsp)|r.q
+|72(%rsp)|r.u[1]
+|64(%rsp)|r.u[0]
+|...|...
+|24(%rsp)|z
+|16(%rsp)|s.p
+|8(%rsp)|s.a[1]
+|%rsp|s.a[0]
+|===
+
+F.
+
+caller pass the structure values in stack and tell the callee to store the structure return values in an appointed address in stack
+
+== Practice 3.68
+
+[source,assembly]
+----
+	void setVal(str1 *p, str2 *q) 
+    p in %rdi, q in %rsi
+1	setVal:
+2	  movslq	8(%rsi), %rax
+3	  addq	32(%rsi), %rax
+4	  movq	%rax, 184(%rdi)
+5	  ret
+----
+
+4 < B < 9
+
+4 < A < 10
+
+since 184 % 8 = 0, so, A * B * 4 = 184 or 180
+
+if A * B * 4 = 184 -> A * B = 46, no solution
+
+if A * B = 45, then, A = 9, B = 5
+
+== Practice 3.69
+
+[source,assembly]
+----
+	void test(long i, b_struct *bp)
+	i in %rdi, bp in %rsi
+1	0000000000000000 <test>:
+2	 mov	0x120(%rsi),%ecx  ; bp->last is at X_{bp} + 0x120
+3	 add	(%rsi),%ecx ; bp->first
+4	 lea	(%rdi,%rdi,4),%rax ; %rax holds 5i
+5	 lea	(%rsi,%rax,8),%rax ; %rax holds X_{bp} + 40i
+6	 mov	0x8(%rax),%rdx ; %rdx holds m[X_{bp} + 40i + 8], that is &bp->a[i]
+7	 movslq	%ecx,%rcx ; %rcx holds bp->first + bp->last
+8	 mov	%rcx,0x10(%rax,%rdx,8) ; m[X_{bp} + 40i + 8*%rdx + 0x10]
+9	 retq
+----
+
+A. 
+
+Since `&bp->a[i]` is stem:[X_{bp} + 40i + 8], we could get `sizeof(a) == 0x28`, and `bp->a` is stem:[X_{bp} + 8]. Since `&bp->last` is at stem:[X_{bp} + 0x120], so `sizeof(a[CNT])` is 0x120 - 0x8 = 0x118,
+
+so CNT = 0x118 / 0x28 = 7
+
+B.
+
+
+[source,C]
+----
+typedef struct {
+    long idx;
+    long x[4];
+} a_struct;
+----
+
+%rdx holds `ap->idx`, so `&ap->x[ap->idx]` is stem:[ap + offset_x + sizeof(a->x) * %rdx], and `ap` is stem:[X_{bp} + 8 + 40i], we get:
+
+stem:[X_{bp} + 40i + 8 + offset_x + sizeof(a->x)\%rdx ]j
+= stem:[X_{bp} + 40i + 0x10 + 8\%rdx]
+
+we got `sizeof(a->x)` is 8, and stem:[offset_x + 8] is 0x10.
+
+so stem:[offset_x] is 8.
+
+Because `sizeof(struct_a)` is 40, we could get x is an array with 4 long.
+
+
+== Practice 3.70
+
+A.
+|===
+|e1.p|0
+|e1.y|8
+|e2.x|0
+|e2.next|8
+|===
+
+B. 
+16.
+
+C. 
+[source,C]
+----
+void proc(union ele *up) {
+    up->e2.x = *(up->e2.next->el.p) - up->next->e1.y;
+}
+----
+
+
+== Practice 3.71
+
+[source,C]
+----
+void good_echo() {
+
+}
+----
+
+== Practice 3.72
+
+[source,assembly]
+----
+long aframe(long n, long idx, long *q)
+n in %rdi, idx in %rsi, q in %rdx
+aframe:
+    pushq %rbp
+    movq %rsp, %rbp
+    subq $16, %rsp  ; allocate space for i
+    leaq 30(,%rdi,8), %rax ; holds 30 + n * sizeof(long *)
+    ; round off lower 4 bits, %rax is 8n + 16 if n is even, or 8n + 24 if n is odd
+    andq $-16, %rax 
+    subq %rax, %rsp ; allocate for array p
+    leaq 15(%rsp), %r8
+    andq $16, %r8
+----
+
+
+A. 
+%rax holds stem:[30 + 8n], ands with stem:[-16] means ands with 0xfffffffffffffff0, the lowest 4 bits is truncated.
+
+* if n is even, stem:[30 + 8n] = stem:[0x10 \cdot n/2 + 0x10 + 0xe] = stem:[0x10 \cdot (n / 2 + 1) + 0xe], 0xe is truncated, so %rax holds stem:[8n + 16].
+
+* if n is odd, stem:[30 + 8n] = stem:[30 + 8(2k + 1)] = stem:[30 + 16k + 8] = stem:[16k + 32 + 6], 6 is truncated, so %rax holds stem:[8(2k + 1) + 24] = stem:[8n + 24]
+
+B. 
+&p[0] is rouned to the smallest multiples of 16 that is bigger than %rsp
+
+C. 
+from B we come the conclusion, stem:[e_2 \in [0, 16)], 
+since:
+
+stem:[\begin{cases}
+  e_1 + 8n + e_2 = 8n + 16  & n \text{ is even} \\
+  e_1 + 8n + e_2 = 8n + 24 & n \text{ is odd}
+\end{cases}]
+
+stem:[\begin{cases}
+  e_1 + e_2 = 16  & n \text{ is even} \\
+  e_1 + e_2 = 24 & n \text{ is odd}
+\end{cases}]
+
+so, stem:[min(e_1)] is stem:[16 - 15 = 1], n is even, stem:[s_1 & 0xf = 0xf] in this case; stem:[max(e_1)] is stem:[24-0 = 24], n is odd, stem:[s_1 & 0xf = 0] in this case;
+
+D. 
+p is aligned to 16 bytes
+
+== Practice 3.72
+
+[source,C]
+----
+typedef enum {NEG, ZERO, POS, OTHER} range_t;
+
+range_t find_range(float x) {
+   int result;
+   if (x < 0) {
+    result = NEG;
+   } else if (x == 0) {
+    result = ZERO
+   } else if (x > 0) {
+    result = POS;
+   } else {
+    result = OTHER;
+   }
+   return result;
+}
+----
+
+
+== Practice 3.73
+
+[source,assembly]
+----
+range_t find_range(float x)
+%xmm0 holds x
+
+    vxorps %xmm1, %xmm1, %xmm1  ; reset %xmm
+    vucomiss %xmm1, %xmm0
+    jb .A
+    je .B
+    ja .C
+    jp .D
+    .A
+    movl 0, %eax
+    ret
+    .B
+    movl 1, %eax
+    ret
+    .C
+    movl 2, %eax
+    ret
+    .D
+    movl 3, %eax
+    ret
+----
+
+
+== Practice 3.74
+
+[source,assembly]
+----
+range_t find_range(float x)
+%xmm0 holds x
+
+    vxorps %xmm1, %xmm1, %xmm1  ; reset %xmm
+    movl 1, %eax
+    vucomiss %xmm1, %xmm0
+    xorq %r8, %r8
+    movq %2, %r9
+    movq $3, %r10
+    cmovbq %r8, %rax 
+    cmovbq %r9, %rax
+    cmovpq %r10, %rax
+----
+
+
+== Practice 3.75
+
+[source,C]
+----
+#include <complex.h>
+
+double c_imag(double complex c) {
+    return cimag(x);
+}
+
+double c_real(double complex c) {
+    return creal(x);
+}
+
+double complex c_sub(double complex x, double complex y) {
+    return x - y;
+}
+----
+
+
+From `c_real`, we come to a conclusion that %xmm0 holds real part and it is returned, from `c_imag`, we could see `%xmm1` is returned, so it is the imagnary part. 
+from `c_sub`, we could see `%xmm2` is `creal(y)` and `%xmm3` is `cimage(y)`, and `%xmm1` is returned as imaginary part, so:
+
+A.
+
+|===
+|param|real|image
+|0|%xmm0|%xmm1
+|1|%xmm2|%xmm3
+3+|...
+|n|%xmm(n*2)|%xmm(n*2 + 1)
+|===
+
+B.
+%xmm0 as c_real(ret),
+%xmm1 as c_image(ret)
+
+

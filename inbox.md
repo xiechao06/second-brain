@@ -1,12 +1,16 @@
 # Inbox
 
-- Here you can write disorganised notes to be categorised later
-- Bullet points are useful, but it could be free form text as well
-- Sometimes it's better to just get things off your mind quickly, rather than stop to think where it belongs
-- But don't let this list get too long
-- Move information to more specific documents and link to them.
-  - This helps you navigate between documents quickly
-  - For example, you can `Cmd`+`Click` (`Ctrl`+`Click` in Windows) this: [[todo]]
-- Some notes don't end up making sense the next day
-- That's ok, you can just delete them!
-  - You can always find them in your git history, if you really need it!
+- doctest
+- what RFCs to read
+- what PEPs to read
+- [Parallel and Distributed Computing in Python with Dask | SciPy 2020 | Bourbeau, McCarty, Pothina - YouTube](https://www.youtube.com/watch?v=EybGGLbLipI)
+- learn poetry
+- learn toolz
+- learn pytest
+- learn latex
+- learn homebrew, how to swap the cn mirror
+- Give a report on how genius learn and work?
+- learn wolframalpha
+- prove PLU algorithm
+- iteration flavor of "leading-row-column LUP algorithm"
+- [ ] learn mamba and 

@@ -67,3 +67,6 @@ You can `inline code` or
 you can create
 code blocks
 ```
+
+[note-properties]: ../features/note-properties "Note Properties"
+[graph-visualization]: ../features/graph-visualization "Graph Visualization"

@@ -36,3 +36,6 @@ A sample configuration object is provided below, you can provide as many or as l
 - `feature` shows an example of how you can use note types to customize the graph. It defines the color for the notes of type `feature`
   - see [[note-properties]] for details
   - you can have as many types as you want
+
+[wikilinks]: wikilinks "Wikilinks"
+[note-properties]: note-properties "Note Properties"

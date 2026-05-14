@@ -1,20 +1,47 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"name": "Filtered View",
-			"uri": "fildir:/"
-		}
-	],
-	"settings": {
-		"files.defaultLanguage": "markdown",
-		"foam.edit.linkReferenceDefinitions": "off",
-		"foam.openDailyNote.directory": "journal",
-		"foam.openDailyNote.titleFormat": "fullDate",
-		"pasteImage.path": "${projectRoot}/attachments",
-		"pasteImage.showFilePathConfirmInputBox": true,
-		"gitdoc.enabled": false
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.defaultLanguage": "markdown",
+    "foam.edit.linkReferenceDefinitions": "off",
+    "foam.openDailyNote.directory": "journal",
+    "foam.openDailyNote.titleFormat": "fullDate",
+    "pasteImage.path": "${projectRoot}/attachments",
+    "pasteImage.showFilePathConfirmInputBox": true,
+    "gitdoc.enabled": false,
+    "cSpell.words": [
+      "cpptools",
+      "mindmap",
+      "taskell"
+    ],
+    "editor.renderLineHighlight": "line",
+    "workbench.colorCustomizations": {
+      "editor.lineHighlightBorder": "#fff"
+    },
+    // force centering in zen mode
+    "zenMode.centerLayout": true,
+    // use the beautiful duospace font when available
+    "editor.fontFamily": "iA Writer Duospace, monospace",
+    // enable word wrap, since horizontal scroll while writing isn't human
+    "editor.wordWrap": "on",
+    // i don't need line numbers, i'm not coding
+    "editor.lineNumbers": "off",
+    // light by default, but can be easily toggled to dark
+    "workbench.colorTheme": "Solarized Dark",
+    // i don't need rules, i'm not coding
+    "editor.rulers": [],
+    // larger text, to improve focus on writing
+    "editor.fontSize": 18,
+    // more comfortable line height
+    "editor.lineHeight": 25,
+    // disable editor suggestions based on previous words
+    "editor.quickSuggestions": {
+		"other": "off",
+		"comments": "off",
+		"strings": "off"
 	}
+  }
 }

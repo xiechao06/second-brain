@@ -20,3 +20,5 @@ In the sidebar to the left, you will see a panel called `Tag Explorer`.
 You can use this panel to see the tags in your notes, and navigate them.
 
 Notice `my-tag1` and `my-tag2`, which were added via [[note-properties]].
+
+[note-properties]: note-properties "Note Properties"

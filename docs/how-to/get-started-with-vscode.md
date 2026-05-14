@@ -41,3 +41,5 @@ You can see a few panels on the left, including:
 ## Settings
 
 To view or change the settings in VS Code, press `cmd+,`
+
+[tags-and-tag-explorer]: ../features/tags-and-tag-explorer "Tags and Tag Explorer"
