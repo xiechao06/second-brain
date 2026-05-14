@@ -6,8 +6,16 @@ layout: default
 
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 <script type="text/javascript">
-  // Initialize Mermaid diagrams
-  mermaid.contentLoaded();
+  // Kramdown renders ```mermaid as <pre><code class="language-mermaid">.
+  // Rewrite those into <pre class="mermaid"> so Mermaid.js picks them up.
+  document.querySelectorAll('pre > code.language-mermaid').forEach((code) => {
+    const pre = code.parentElement;
+    const div = document.createElement('pre');
+    div.className = 'mermaid';
+    div.textContent = code.textContent;
+    pre.replaceWith(div);
+  });
+  mermaid.initialize({ startOnLoad: true });
 
   // Hack: Replace page-link with "Page Title"
   document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
