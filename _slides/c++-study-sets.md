@@ -1,9 +1,12 @@
 ---
 marp: true
 title: "c++-study-sets"
-theme: default
+theme: gödel
 size: 16:9
+math: mathjax
 ---
+
+<!-- MarpX theme: https://cunhapaulo.github.io/marpx/themes/gödel.css -->
 
 <style>
 section {
@@ -74,7 +77,9 @@ template <typename T> T bar() noexcept<std::is_nothrow_constructible_v<T>> {
 }
 ```
 
-`foo` won’t throw any exceptions if T’s constructor `T()` won’t throw.
+Here `foo` won’t throw any exceptions if T’s constructor `T()` won’t throw.
+
+---
 
 `noexcept` could also work as an operator to check if a function is declared to not throw any exception at compile time:
 
@@ -230,10 +235,18 @@ constexpr double power(double base, int exp) {
 
 ---
 
-In **C++20**, 
+In **C++20**, yes, as long as the virtual function is declared as `constexpr` and the invocation is a constant expression. For example:
 
----
-
----
-
-Content
+```c++
+struct Base {
+  virtual constexpr int foo() const { return 42; }
+};
+struct Derived : Base {
+  virtual constexpr int foo() const override { return 24; }
+};
+constexpr int call_foo(const Base& b) {
+  return b.foo();
+}
+Derived d;
+constexpr int result = call_foo(d); // ok, evaluated at compile time, returns 24
+```

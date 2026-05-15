@@ -42,7 +42,7 @@ jobs:
           for file in _slides/*.md; do
             [ -e "$file" ] || continue
             filename=$(basename "$file" .md)
-            marp "$file" --html --output "slides/$filename.html"
+            marp "$file" --html --theme-set https://cunhapaulo.github.io/marpx/themes/gödel.css --output "slides/$filename.html"
           done
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
