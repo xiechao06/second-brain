@@ -3,10 +3,7 @@ marp: true
 title: "c++-study-sets"
 theme: gödel
 size: 16:9
-math: mathjax
 ---
-
-<!-- MarpX theme: https://cunhapaulo.github.io/marpx/themes/gödel.css -->
 
 <style>
 section {
@@ -249,4 +246,3 @@ constexpr int call_foo(const Base& b) {
 }
 Derived d;
 constexpr int result = call_foo(d); // ok, evaluated at compile time, returns 24
-```
