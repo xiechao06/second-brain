@@ -1,4 +1,5 @@
 .DS_Store
+node_modules/
 
 # Jekyll build output and caches
 _site/

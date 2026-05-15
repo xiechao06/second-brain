@@ -1,8 +1,8 @@
 ---
 marp: true
 title: "c++-study-sets"
-# theme: gödel
-theme: newton
+theme: gödel
+# theme: newton
 size: 16:9
 ---
 
