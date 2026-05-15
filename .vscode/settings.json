@@ -1,21 +1,21 @@
 {
 	"markdown.marp.themes": [
-		"https://cunhapaulo.github.io/marpx/themes/marpx.css",
-		"https://cunhapaulo.github.io/marpx/themes/cantor.css",
-		"https://cunhapaulo.github.io/marpx/themes/church.css",
-		"https://cunhapaulo.github.io/marpx/themes/copernicus.css",
-		"https://cunhapaulo.github.io/marpx/themes/einstein.css",
-		"https://cunhapaulo.github.io/marpx/themes/frankfurt.css",
-		"https://cunhapaulo.github.io/marpx/themes/galileo.css",
-		"https://cunhapaulo.github.io/marpx/themes/gauss.css",
-		"https://cunhapaulo.github.io/marpx/themes/gropius.css",
-		"https://cunhapaulo.github.io/marpx/themes/gödel.css",
-		"https://cunhapaulo.github.io/marpx/themes/haskell.css",
-		"https://cunhapaulo.github.io/marpx/themes/hobbes.css",
-		"https://cunhapaulo.github.io/marpx/themes/lorca.css",
-		"https://cunhapaulo.github.io/marpx/themes/newton.css",
-		"https://cunhapaulo.github.io/marpx/themes/socrates.css",
-		"https://cunhapaulo.github.io/marpx/themes/sparta.css"
+		"./marpx/themes/marpx.css",
+		"./marpx/themes/cantor.css",
+		"./marpx/themes/church.css",
+		"./marpx/themes/copernicus.css",
+		"./marpx/themes/einstein.css",
+		"./marpx/themes/frankfurt.css",
+		"./marpx/themes/galileo.css",
+		"./marpx/themes/gauss.css",
+		"./marpx/themes/gropius.css",
+		"./marpx/themes/gödel.css",
+		"./marpx/themes/haskell.css",
+		"./marpx/themes/hobbes.css",
+		"./marpx/themes/lorca.css",
+		"./marpx/themes/newton.css",
+		"./marpx/themes/socrates.css",
+		"./marpx/themes/sparta.css"
 	],
 	"gitdoc.enabled": true
 }

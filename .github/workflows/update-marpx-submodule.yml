@@ -1,0 +1,38 @@
+name: Update marpx submodule
+
+on:
+  schedule:
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-submodule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Update marpx submodule to latest remote commit
+        run: |
+          git submodule update --remote --recursive marpx
+
+      - name: Create pull request for submodule update
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update marpx submodule"
+          title: "chore: update marpx submodule"
+          body: |
+            Automated update of the `marpx` git submodule to the latest upstream commit.
+          branch: "chore/update-marpx-submodule"
+          labels: |
+            dependencies
+            automated
+          add-paths: |
+            marpx
