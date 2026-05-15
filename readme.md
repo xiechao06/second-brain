@@ -37,3 +37,10 @@ In the `docs` directory you can find everything you need to learn the basics of 
 As you may have noticed, issues are disabled. With the goal to keep the project fairly easy to maintain, please file your issues in the main Foam repository:
 
 > <https://github.com/foambubble/foam>
+
+## Slides workflow
+
+- The `_slides` directory is ignored by Jekyll and not published to the site directly.
+- All Markdown files in `_slides/` are automatically converted to HTML slides using Marp CLI in the `slides/` directory by a GitHub Actions workflow.
+- To add or update slides, edit or add Markdown files in `_slides/` and push to `main`. The workflow will build and output HTML slides to `slides/`.
+- See `.github/workflows/build-slides.yml` for details.

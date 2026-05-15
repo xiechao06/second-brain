@@ -27,6 +27,7 @@ exclude:
   - vendor
   - "*.mmd"
   - README.md
+  - _slides
 
 # Enable future posts
 future: false
