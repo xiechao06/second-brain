@@ -39,10 +39,34 @@ jobs:
       - name: Build slides with Marp
         run: |
           mkdir -p slides
+          THEME_SETS=(
+            "https://cunhapaulo.github.io/marpx/themes/marpx.css"
+            "https://cunhapaulo.github.io/marpx/themes/cantor.css"
+            "https://cunhapaulo.github.io/marpx/themes/church.css"
+            "https://cunhapaulo.github.io/marpx/themes/copernicus.css"
+            "https://cunhapaulo.github.io/marpx/themes/einstein.css"
+            "https://cunhapaulo.github.io/marpx/themes/frankfurt.css"
+            "https://cunhapaulo.github.io/marpx/themes/galileo.css"
+            "https://cunhapaulo.github.io/marpx/themes/gauss.css"
+            "https://cunhapaulo.github.io/marpx/themes/gropius.css"
+            "https://cunhapaulo.github.io/marpx/themes/gödel.css"
+            "https://cunhapaulo.github.io/marpx/themes/haskell.css"
+            "https://cunhapaulo.github.io/marpx/themes/hobbes.css"
+            "https://cunhapaulo.github.io/marpx/themes/lorca.css"
+            "https://cunhapaulo.github.io/marpx/themes/newton.css"
+            "https://cunhapaulo.github.io/marpx/themes/socrates.css"
+            "https://cunhapaulo.github.io/marpx/themes/sparta.css"
+          )
+
+          THEME_ARGS=()
+          for theme in "${THEME_SETS[@]}"; do
+            THEME_ARGS+=(--theme-set "$theme")
+          done
+
           for file in _slides/*.md; do
             [ -e "$file" ] || continue
             filename=$(basename "$file" .md)
-            marp "$file" --html --theme-set marpx/themes/ --output "slides/$filename.html"
+            marp "$file" --html "${THEME_ARGS[@]}" --output "slides/$filename.html"
           done
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1

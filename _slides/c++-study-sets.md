@@ -1,11 +1,12 @@
 ---
 marp: true
 title: "c++-study-sets"
-theme: gödel
+# theme: gödel
+theme: newton
 size: 16:9
 ---
 
-<style>
+<!-- <style>
 section {
   font-family: "iA Writer Quattro S";
   background: wheat;
@@ -15,7 +16,7 @@ code, pre {
   background: #f0f0f0;
   line-height: 1.8;
 }
-</style>
+</style> -->
 
 ## What is the const reference to temporary rvalue?
 
