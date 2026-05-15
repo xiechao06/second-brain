@@ -2,21 +2,8 @@
 marp: true
 title: "c++-study-sets"
 theme: gödel
-# theme: newton
 size: 16:9
 ---
-
-<!-- <style>
-section {
-  font-family: "iA Writer Quattro S";
-  background: wheat;
-}
-code, pre {
-  font-family: 'Google Sans Code', 'Fira Mono', 'Consolas', 'Menlo', monospace;
-  background: #f0f0f0;
-  line-height: 1.8;
-}
-</style> -->
 
 ## What is the const reference to temporary rvalue?
 
@@ -245,5 +232,146 @@ struct Derived : Base {
 constexpr int call_foo(const Base& b) {
   return b.foo();
 }
-Derived d;
+constexpr Derived d;
 constexpr int result = call_foo(d); // ok, evaluated at compile time, returns 24
+```
+
+---
+
+## Why `static_cast` to downcast is dangerous?
+
+---
+
+Use `static_cast` to downcast is syntactically correct, but it doesn't perform any runtime checks to ensure that the object being cast is actually of the target type. When downcast, user usually mean to get the target type, if it is not, it leads to undefined errors. For example:
+
+```c++
+class Base {
+  virtual void foo() {}
+}
+class Derived : public Base {
+  virtual void bar() {}
+};
+
+Base b;
+Derived d;
+
+Derived* pd1 = static_cast<Derived*>(&b); // ok, but pd1 is a dangling pointer, dereferencing it leads to undefined behavior
+pd1->bar(); // undefined behavior
+```
+
+---
+
+## why use static_cast to upcast is safe?
+
+---
+
+Because a *derived class* object is also a *base class* object, but not vice versa. So when upcasting, the object being cast is always of the target type. But you seldomly see people use `static_cast` to upcast, since the implicit conversion from derived class pointer/reference to base class pointer/reference is already provided by the language.
+
+---
+
+## what is `const_cast` and when to use it?
+
+---
+
+`const_cast` is used to add or remove `const` qualifier from a variable. It can also be used to add or remove `volatile` qualifier. It is used to cope with legacy code that call a function that doesn't accept `const` parameters, but the parameters are actually not modified by the function. Besides, `const_cast` only works on the syntax level, it doesn't generate any machine instructions
+
+---
+
+## What is `reinterpret_cast`?
+
+---
+
+It tells c++ just interpret the bits as a certain type. That's a type of unsafe cast, it doesn't generate machine instructions too.
+
+---
+
+## What is expression's value category tree
+
+---
+
+In c++, every expression has a *value category* beside *type*, like:
+
+```txt
+         expression
+        /          \
+    glvalue        rvalue
+    /     \       /     \
+lvalue   xvalue  xvalue  prvalue
+```
+
+---
+
+## Explain `move` semantics
+
+---
+
+`move` semantics enable moving resources from one object to another, instead of copying them. This is particularly useful for classes that manage resources such as dynamic memory, file handles, or network connections.
+The only movable value category is **xvalue**, which stands for "expiring value". An expression of category xvalue represents an object that is about to be moved from, you use `std::move` (std::static_cast<T&&> actually) to convert a *lvalue* to *xvalue*, for example:
+
+```cpp
+std::vector<int> v1{1, 2, 3};
+// v1 is an lvalue, but std::move(v1) is an xvalue
+// which indicates that v1 can be moved from
+std::vector<int> v2 = std::move(v1);
+```
+
+---
+
+## Explain the difference between rvalue reference and forward reference
+
+---
+
+An rvalue reference is a reference that can bind to an rvalue, it is declared with `&&`, like:
+
+```c++
+void foo(int&& x) { 
+  // x is an rvalue reference, it can bind to an rvalue
+}
+```
+
+---
+A forward reference is a reference that can bind to both lvalues and rvalues, it is declared with `&&` in a template context, like:
+
+```c++
+template <typename T>
+void bar(T&& x) {
+  // x is a forward reference, it can bind to both lvalues and rvalues
+}
+
+int a = 42;
+bar(a); // x is an lvalue reference to int
+bar(42); // x is an rvalue reference to int
+```
+
+---
+
+## what is difference between `std::move` and `std::forward`?
+
+---
+
+std::move is used to indicate that an object can be moved from, it unconditionally casts its argument to an rvalue reference, while std::forward is used in a template context to preserve the value category of its argument, it conditionally casts its argument to an rvalue reference if it is an rvalue, otherwise it returns the argument as is. For example:
+
+```c++
+template <typename T>
+void baz(T&& x) {
+  // std::forward preserves the value category of x
+  qux(std::forward<T>(x));
+}
+```
+
+In this example, if `baz` is called with an lvalue, `std::forward<T>(x)` will return an lvalue reference, and if `baz` is called with an rvalue, `std::forward<T>(x)` will return an rvalue reference. This allows `qux` to properly handle both *lvalue* and *rvalue* passed to `baz`.
+
+---
+
+## What is perfect forwarding?
+
+---
+
+```tikz
+\begin{document}
+\begin{tikzpicture}[scale=2]
+  \draw (0,0) rectangle (3,2);
+  \node at (1.5,1) {\Large Hello!};
+\end{tikzpicture}
+\end{document}
+```
