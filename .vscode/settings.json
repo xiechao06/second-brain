@@ -17,5 +17,5 @@
 		"./marpx/themes/socrates.css",
 		"./marpx/themes/sparta.css"
 	],
-	"gitdoc.enabled": true
+	"gitdoc.enabled": false
 }
