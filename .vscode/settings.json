@@ -17,5 +17,14 @@
 		"./marpx/themes/socrates.css",
 		"./marpx/themes/sparta.css"
 	],
-	"gitdoc.enabled": false
+	"gitdoc.enabled": false,
+	"cSpell.words": [
+		"calloc",
+		"cout",
+		"endl",
+		"malloc",
+		"memcpy",
+		"NRVO",
+		"prvalue"
+	]
 }

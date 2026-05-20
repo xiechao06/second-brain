@@ -1,17 +1,61 @@
+---
+marp: true
+theme: lorca
+size: 16:9
+---
+
 # VSCODE TIPS
 
-## Extension `tabout` conflicts with *auto suggestions*
+---
 
-Using `ESCAPE` to hide suggestion widget will come normal mode when *vim* extension is enabled. So another **rarely used** keystroke would be a better choice to hide *suggestion widget*, here we choose `'`;
+## ␛ should hide *auto suggestions* without entering *vim normal mode*
 
-add following keybinding:
+---
 
 ```json
 {
-"key"    : "'",
-"command": "hideSuggestWidget",
-"when"   : "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus",
+  "key": "escape",
+  "command": "hideSuggestWidget",
+  "when": "suggestWidgetVisible && textInputFocus && suggestWidgetHasFocusedSuggestion"
+},
+{
+  "key": "ctrl+[",
+  "command": "hideSuggestWidget",
+  "when": "suggestWidgetVisible && textInputFocus && suggestWidgetHasFocusedSuggestion"
 }
 ```
 
-or, if you type quick enough, you may *tabout* before suggestion widget pop up.
+---
+
+## Extension [tabout](https://marketplace.visualstudio.com/items?itemName=albert.TabOut) conflicts with snippets and *next edit suggestions*
+
+---
+
+make `tabout` has the lowest priority.
+
+```json
+{
+  "key": "tab",
+  "command": "-tabout",
+},
+{
+  "key": "tab",
+  "command": "tabout",
+  "when": "editorTextFocus && !inSnippetMode &&
+   !inlineSuggestionVisible && !suggestWidgetVisible &&
+    !hasSnippetCompletions && !hasOtherSuggestions &&
+     !editorTabMovesFocus && !tabShouldJumpToInlineEdit &&
+      !tabShouldAcceptInlineEdit && !vim.active"
+},
+```
+
+---
+
+## How to trigger parameter hints and switch between overloads?
+
+---
+
+Use `⌘+⇧+⎵` to trigger parameter hints.
+Use `⌥+↑`/`⌥+↓` to switch between overloads.
+
+---
