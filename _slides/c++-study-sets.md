@@ -820,10 +820,40 @@ Use `ranges::to`.
 
 ---
 
-## What is member pointer and member function pointer?
+## What are **member pointer** and **member function pointer**?
 
 ---
 
+A kind of special pointer to **class** member or member function. It holds no memory address and more like a **projection**.
+
+```c++
+struct foo {
+  int a;
+  std::string b;
+};  
+int foo::*x = &foo::a;
+std::string foo::*y = &foo::b;
+foo f{10, "20"};
+std::cout << f.*x << ' ' << f.*y std::endl;
+```
+
+---
+
+Here are an example of **member pointer** as a projection.
+
+```c++
+struct player {
+  std::string name;
+  int score;
+  bool is_active() const { return score > 0; }
+};
+std::vector<player> players{{"Alice", 10}, {"Bob", 0}, {"Charlie", 5}};
+// &player::is_active as a projection
+auto active_players = ranges::count_if(players, &player::is_active);
+// or
+auto active_players2 = std::count_if(players.begin(), players.end(),
+                                    std::mem_fn(&player::is_active));
+```
 
 ---
 
@@ -1040,3 +1070,30 @@ public:
 This is an example of singleton using `curiously recurring template pattern`.
 
 ---
+
+## What is **forward declaration**?
+
+---
+
+It tells the compiler a type exists, without including the full header here. It allows using pointers or references without the full type definition, thus reduce header dependencies & compile time.
+
+```c++
+// database_manager.h
+
+// forward declaration, no need to include <sqlite>
+struct sqlite_db_handler;
+class database_manager {
+private:
+  sqlite_db_handler *db;
+};
+```
+
+---
+
+```c++
+// in database_manager.cpp
+#include <sqlite>
+#include "database_manager.h"
+```
+
+In this example, database_manager use sqlite as database, but avoid exposing it to callers.
