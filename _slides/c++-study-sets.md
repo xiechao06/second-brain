@@ -1097,3 +1097,32 @@ private:
 ```
 
 In this example, database_manager use sqlite as database, but avoid exposing it to callers.
+
+---
+
+## What is **literal type**?
+
+**literal type** are types that can be *returned*, *manipulated* and *constructed* from a `constexpr` function.
+
+---
+
+## Explain `std::underlying_type`
+
+Its a compiler-supported **type trait**. It is defined like:
+
+```c++
+template <typename T>
+struct underlying_type {
+  using type = <the integer type backs enum type T>;
+};
+template <typename T>                                                   
+using underlying_type_t = typename underlying_type<T>::type;  
+```
+
+And it's a kind of compiler-time reflection. The canonical way to get the underlying value of any scoped enum is:
+
+```c++
+enum class color: uint8_t {red, green, blue};
+using BACKING_T = std::underlying_type_t<color>;
+auto v{static_cast<BACKING_T>(color::red)};
+```
