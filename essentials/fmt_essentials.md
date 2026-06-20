@@ -1,8 +1,6 @@
 # FMT (version 12.2.0) lib essentials
 
-`fmt` provide python's f-string capabilities to c++.
-
-[official site](https://fmt.dev)
+[fmt](https://fmt.dev) provide python's f-string capabilities to c++.
 
 ## Basic usage
 
@@ -252,7 +250,7 @@ void log(const char* file, int line,
 }
 ```
 
-If you implement `log` using `fmt::print` like: 
+If you implement `log` using `fmt::print` like:
 
 ```c++
 template <typename... T>
@@ -284,3 +282,33 @@ void log(const char* file, int line,
 }
 ```
 
+## Some examples
+
+```c++
+// :#x spec element
+fmt::println("{::#x}", std::vector{'h', 'e', 'l', 'l', 'o'}); // > [0x68, 0x65, 0x6c, 0x6c, 0x6f] 
+fmt::format("{:<10}", "hello"); // > "hello     "
+fmt::format("{:>10}", "hello"); // > "     hello"
+fmt::format("{:*^11}", "hello"); // > "***hello***"
+
+// dynamic width set to 10
+fmt::format("{:<{}}", "hello", 10); 
+
+// always show sign
+fmt::format("{:+f}; {:+f}", 3.14, -3.14);  // > "+3.140000; -3.140000"
+// show a space for positive numbers
+fmt::format("{: f}; {: f}", 3.14, -3.14);  // > " 3.140000; -3.140000"
+// show only the minus -- same as '{:f}; {:f}'
+fmt::format("{:-f}; {:-f}", 3.14, -3.14); // > "3.140000; -3.140000"
+
+// with prefix, minimum length 4, padding with 0
+fmt::format("{:#04x}", 0); // > 0x00
+
+fmt::print(
+    "┌{0:─^{2}}┐\n"
+    "│{1: ^{2}}│\n"
+    "└{0:─^{2}}┘\n", "", "Hello, world!", 20);
+// > ┌────────────────────┐
+//   │   Hello, world!    │
+//   └────────────────────┘
+```
