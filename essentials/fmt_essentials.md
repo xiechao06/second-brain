@@ -1,5 +1,7 @@
 # FMT (version 12.2.0) lib essentials
 
+`fmt` provide python's f-string capabilities to c++.
+
 [official site](https://fmt.dev)
 
 ## Basic usage
