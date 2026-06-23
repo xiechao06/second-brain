@@ -8,3 +8,5 @@
 * [range-v3](https://ericniebler.github.io/range-v3/) for functional programming.
 * [google-test](https://google.github.io/googletest/) for testing.
 * [date](https://github.com/HowardHinnant/date) for time_point, timezone etc.
+• [OpenMP](https://www.openmp.org/resources/) for numeric inner loops
+• [Kokkos](https://github.com/kokkos/kokkos) for long-horizon HPC software where architecture portability matters
