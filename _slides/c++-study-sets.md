@@ -1126,3 +1126,9 @@ enum class color: uint8_t {red, green, blue};
 using BACKING_T = std::underlying_type_t<color>;
 auto v{static_cast<BACKING_T>(color::red)};
 ```
+
+---
+
+## What is `ADL`
+
+---
