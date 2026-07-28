@@ -1042,3 +1042,21 @@ async function getAllData(urls) {
 ```
 
 ---
+
+## What are 3 factors of object properties?
+
+---
+
+- Enumerability
+- String or symbol
+- Own property or inherited property from prototype chain
+
+---
+
+## What is `closure`?
+
+---
+
+Closure is a combination of `function` and its enclosing variables.
+
+---
