@@ -26,5 +26,35 @@
 		"memcpy",
 		"NRVO",
 		"prvalue"
-	]
+	],
+	"workbench.colorTheme": "Markdown Editor Focus",
+	"editor.minimap.enabled": false,
+	"breadcrumbs.enabled": false,
+	"editor.glyphMargin": false,
+	"explorer.decorations.badges": false,
+	"explorer.decorations.colors": false,
+	"editor.fontLigatures": true,
+	"files.autoSave": "afterDelay",
+	"git.enableSmartCommit": true,
+	"window.commandCenter": false,
+	"editor.renderWhitespace": "none",
+	"markdown.validate.enabled": true,
+	"markdown.updateLinksOnFileMove.enabled": "prompt",
+	"workbench.startupEditor": "none",
+	"editor.fontFamily": "iA Writer Mono S",
+	"editor.fontSize": 18,
+	"editor.fontWeight": "350",
+	"editor.formatOnSave": true,
+	"editor.inlayHints.enabled": "on",
+	"editor.lineHeight": 2.2,
+	"workbench.tree.renderIndentGuides": "always",
+	// zenMode settings
+	"zenMode.showTabs": "none",
+	"editor.scrollbar.vertical": "hidden",
+	// "zenMode.fullScreen": false,
+	"zenMode.restore": true,
+	"zenMode.hideStatusBar": false,
+	"zenMode.hideLineNumbers": false,
+	"zenMode.centerLayout": true
+	// vspacecode settings
 }

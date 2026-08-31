@@ -1060,3 +1060,178 @@ async function getAllData(urls) {
 Closure is a combination of `function` and its enclosing variables.
 
 ---
+
+## Explain `proxy`
+
+---
+
+A proxy can intercept and redefine fundamental operations for that object.
+
+```javascript
+const handler = {
+  // receiver is the proxy object
+  get(target, name, receiver) {
+    return name in target ? target[name] : 42;
+  },
+}
+
+const p = new Proxy({a: 1}, handler);
+console.log(p.a, p.b); // 1, 42
+```
+
+---
+
+```javascript
+const person = new Proxy({}, {
+  set(obj, prob, value) {
+    if (prop === 'age') {
+      if (!Number.isInteger(value)) {
+        throw new TypeError("The age is not an integer");
+      }
+    }
+    obj[prop] = value;
+    return true;
+  }
+});
+
+person.age = "young"; // Throws an exception
+```
+
+---
+
+## What is **Revocable Proxy**?
+
+---
+
+A proxy that could be revoke, like the following:
+
+---
+
+```javascript
+const revocable = Proxy.revocable({}, {
+  get(target, name) {
+    return `[[$name]]`;
+  }
+});
+
+const proxy = revocable.proxy;
+console.log(proxy.foo); // "[[name]]"
+
+revokable.revoke();
+console.log(proxy.foo); // TypeError: Cannot perform 'get' on a proxy that has been revoked
+```
+
+---
+
+## Explain Utility Type `Exclude<T, U>`
+
+---
+
+`Exclude<T, U>` is defined as:
+
+```typescript
+type Exclude<T, U> = T extends U ? never : T;
+```
+
+When you apply a conditional type to a union type, Ts distributes the condition over each member of the union, so:
+
+```typescript
+Exclude<'Admin' | 'Manager' | 'Worker' | 'Guest', 'Guest'>
+```
+
+is expanded to:
+
+```typescript
+'Admin' extends 'Guest' ? never : 'Admin' |
+'Manager' extends 'Guest' ? never : 'Manager' |
+'Worker' extends 'Guest' ? never : 'Worker' |
+'Guest' extends 'Guest' ? never : 'Guest' 
+```
+
+---
+
+## What is the point of `never`?
+
+---
+
+## Explain `type guards`
+
+---
+
+## Explain `Assertion Functions`
+
+---
+
+## Explain `Discriminated Union`
+
+---
+
+## How to create interface/type that is callable?
+
+---
+
+```typescript
+type Callable = {
+    (): number;
+}
+
+function foo(callable: Callable) {
+    console.log(callable());
+}
+
+foo(() => 42); // This will log 42 to the console   
+```
+
+---
+
+## Explain `new` signature in type/interface
+
+---
+
+## Explain `parameter properties`
+
+---
+
+A shortcut to define properties in class.
+
+```typescript
+class Point {
+  constructor(public x: number, public y: number);
+}
+```
+
+equals to:
+
+```typescript
+class Point {
+  public x: number;
+  public y: number;
+  constructor(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
+}
+```
+
+---
+
+## `private x` vs `#x`
+
+---
+
+`#x` is the real private field in javascript, whilst `private x` is only for static
+type checking and has no effect in runtime.
+
+---
+
+## How to declare a `tuple type`?
+
+---
+
+## Explain `ThisType`
+
+---
+
+## Explain `NoInfer`
+
+---
